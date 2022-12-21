@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
+from .groups import group_members
 
 
 class User(db.Model, UserMixin):
@@ -21,6 +22,7 @@ class User(db.Model, UserMixin):
     stocks = db.relationship("Stock", back_populates="user")
     transactions = db.relationship("Transaction", back_populates="user")
     watchlists = db.relationship("Watchlist", back_populates="user")
+    groups = db.relationship("Group", secondary=group_members, back_populates="members")
 
     @property
     def password(self):
