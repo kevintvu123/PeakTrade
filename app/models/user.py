@@ -5,10 +5,10 @@ from datetime import datetime
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+        __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
@@ -19,6 +19,8 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
 
     stocks = db.relationship("Stock", back_populates="user")
+    transactions = db.relationship("Transaction", back_populates="user")
+    watchlists = db.relationship("Watchlist", back_populates="user")
 
     @property
     def password(self):
@@ -33,10 +35,10 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'email': self.email,
-            'firstName': self.first_name,
-            'lastName': self.last_name,
-            'buyingPower': self.buying_power,
-            'createdAt': self.created_at
+            "id": self.id,
+            "email": self.email,
+            "firstName": self.first_name,
+            "lastName": self.last_name,
+            "buyingPower": self.buying_power,
+            "createdAt": self.created_at,
         }

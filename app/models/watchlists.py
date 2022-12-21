@@ -1,8 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
-class Stock(db.Model):
-    __tablename__ = "stocks"
+class Watchlist(db.Model):
+    __tablename__ = "watchlists"
 
     if environment == "production":
         __table_args__ = {"schema": SCHEMA}
@@ -12,17 +12,17 @@ class Stock(db.Model):
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
     name = db.Column(db.String, nullable=False)
-    ticker = db.Column(db.String, nullable=False)
-    amount = db.Column(db.Integer, nullable=False)
-    market_value = db.Column(db.Float, nullable=False)
 
-    user = db.relationship("User", back_populates="stocks")
+    user = db.relationship("User", back_populates="watchlists")
+    watchlist_stocks = db.relationship(
+        "Watchlist_Stock", back_populates="watchlist", cascade="all, delete-orphan"
+    )
 
     def to_dict(self):
         return {
             "id": self.id,
             "name": self.name,
-            "ticker": self.ticker,
-            "amount": self.amount,
-            "marketValue": self.market_value,
+            "watchlistStocks": [
+                watchlist_stock.to_dict() for watchlist_stock in self.watchlist_stocks
+            ],
         }
