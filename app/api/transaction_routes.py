@@ -43,7 +43,7 @@ def handle_create_update_delete_transactions():
         # Calculating Total price to update User's buying power
         price = data["price"]
         quantity = data["quantity"]
-        total_price = price * quantity
+        total_price = int(price) * int(quantity)
 
         if data["order_type"] == "buy":
 
@@ -89,10 +89,10 @@ def handle_create_update_delete_transactions():
             # Stock ticker does exist in the user's portfolio (Update)
             if stock_in_portfolio:
                 # Calculating new average price for stock
-                new_amount = stock_in_portfolio.amount + data["amount"]
+                new_amount = stock_in_portfolio.amount + int(data["amount"])
                 new_total_price = (
                     stock_in_portfolio.avg_stock_value * stock_in_portfolio.amount
-                ) + (data["quantity"] * data["price"])
+                ) + (int(data["quantity"]) * int(data["price"]))
                 new_stock_avg_price = new_total_price / new_amount
 
                 data["avg_stock_value"] = new_stock_avg_price
