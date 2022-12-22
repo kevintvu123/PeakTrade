@@ -14,7 +14,7 @@ class Stock(db.Model):
     name = db.Column(db.String, nullable=False)
     ticker = db.Column(db.String, nullable=False)
     amount = db.Column(db.Integer, nullable=False)
-    market_value = db.Column(db.Float, nullable=False)
+    avg_stock_value = db.Column(db.Float, nullable=False)
 
     user = db.relationship("User", back_populates="stocks")
 
@@ -24,5 +24,5 @@ class Stock(db.Model):
             "name": self.name,
             "ticker": self.ticker,
             "amount": self.amount,
-            "marketValue": self.market_value,
+            "avgStockValue": self.avg_stock_value,
         }
