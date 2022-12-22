@@ -43,4 +43,8 @@ class User(db.Model, UserMixin):
             "lastName": self.last_name,
             "buyingPower": self.buying_power,
             "createdAt": self.created_at,
+            "stocks": [stock.to_dict() for stock in self.stocks],
+            "transactions": [
+                transaction.to_dict() for transaction in self.transactions
+            ],
         }
