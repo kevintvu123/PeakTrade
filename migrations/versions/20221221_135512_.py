@@ -9,6 +9,7 @@ from alembic import op
 import sqlalchemy as sa
 
 import os
+
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
@@ -61,7 +62,7 @@ def upgrade():
         sa.Column("name", sa.String(), nullable=False),
         sa.Column("ticker", sa.String(), nullable=False),
         sa.Column("amount", sa.Integer(), nullable=False),
-        sa.Column("market_value", sa.Float(), nullable=False),
+        sa.Column("avg_stock_value", sa.Float(), nullable=False),
         sa.ForeignKeyConstraint(
             ["user_id"],
             ["users.id"],
