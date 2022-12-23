@@ -3,14 +3,13 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { postTransactionThunk } from "../../store/portfolio";
 
-export default function BuyStockForm({ setHasSubmitted }) {
+export default function BuyStockForm({ setHasSubmitted, stockName }) {
     const dispatch = useDispatch();
     const { stockTicker } = useParams();
 
     const [errors, setErrors] = useState([])
     const [quantity, setQuantity] = useState(0)
     const [price, setPrice] = useState(0)
-    const [stockName, setStockName] = useState("")
 
     const handleBuyStock = async (e) => {
         e.preventDefault();
@@ -37,14 +36,14 @@ export default function BuyStockForm({ setHasSubmitted }) {
         <div>
             <form onSubmit={handleBuyStock}>
                 <div>
-                    <label htmlFor="buyStockName">
-                        Name
+                    <label htmlFor="buyStockQuantity">
+                        Quantity
                     </label>
                     <input
-                        id="buyStockName"
-                        type="text"
-                        value={stockName}
-                        onChange={(e) => setStockName(e.target.value)}
+                        id="buyStockQuantity"
+                        type="number"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
                         required
                     />
                 </div>
@@ -57,18 +56,6 @@ export default function BuyStockForm({ setHasSubmitted }) {
                         type="number"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="buyStockQuantity">
-                        Quantity
-                    </label>
-                    <input
-                        id="buyStockQuantity"
-                        type="number"
-                        value={quantity}
-                        onChange={(e) => setQuantity(e.target.value)}
                         required
                     />
                 </div>

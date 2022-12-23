@@ -33,11 +33,7 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        {/* <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute> */}
         <Route path='/' exact={true} >
-          <h1>Home</h1>
         </Route>
         <Route path='/stocks/:stockTicker'>
           <StockDetail />

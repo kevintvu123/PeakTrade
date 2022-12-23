@@ -43,7 +43,7 @@ def handle_create_update_delete_transactions():
         # Calculating Total price to update User's buying power
         price = data["price"]
         quantity = data["quantity"]
-        total_price = int(price) * int(quantity)
+        total_price = (price) * int(quantity)
 
         if data["order_type"] == "buy":
 
@@ -76,7 +76,7 @@ def handle_create_update_delete_transactions():
                     )
 
                     # Updating User's Buying Power
-                    user.buying_power = user.buying_power - total_price
+                    user.buying_power = user.buying_power - float(total_price)
 
                     db.session.add_all([create_transaction, create_stock_portfolio])
                     db.session.commit()

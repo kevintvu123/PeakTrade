@@ -9,6 +9,8 @@ export default function StockDetail() {
     const { stockTicker } = useParams()
 
     const [hasSubmitted, setHasSubmitted] = useState(false)
+    const [stockName, setStockName] = useState("")
+    const [stockPrice, setStockPrice] = useState()
 
     const portfolio = useSelector((state) => state.portfolio)
 
@@ -16,16 +18,34 @@ export default function StockDetail() {
         dispatch(getUserPortfolioThunk())
     }, [dispatch, hasSubmitted])
 
+    const apiKey = process.env.REACT_APP_API_KEY
+    const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stockTicker}&apikey=${apiKey}`
+    const url2 = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${stockTicker}&apikey=${apiKey}`
+
+    useEffect(() => {
+        fetch(url)
+            .then(res => res.json())
+            .then((result) => {
+                setStockPrice(result['Global Quote']['05. price'])
+            })
+        fetch(url2)
+            .then(res => res.json())
+            .then((result) => {
+                setStockName(result['Name'])
+            })
+    })
+
     if (Object.keys(portfolio).length === 0) return null
 
     const ownedStockObj = portfolio.stocks[stockTicker]
-    console.log(ownedStockObj)
 
     return (
         <div>
             <h1>{stockTicker}</h1>
+            <h2>{stockName}</h2>
+            <h2>${stockPrice}</h2>
             <div>
-                <BuyStockForm setHasSubmitted={setHasSubmitted} />
+                <BuyStockForm setHasSubmitted={setHasSubmitted} stockName={stockName} />
                 <h1>
                     User Portfolio
                 </h1>
