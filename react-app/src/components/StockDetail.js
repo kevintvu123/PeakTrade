@@ -51,6 +51,9 @@ export default function StockDetail() {
                 <h1>
                     User Portfolio
                 </h1>
+                <h2>
+                    Buying Power: ${portfolio.buyingPower}
+                </h2>
                 {(Object.keys(portfolio.stocks).length === 0) && (
                     <div>
                         You have no stonks!!
@@ -58,9 +61,6 @@ export default function StockDetail() {
                 )}
                 {ownedStockObj && (
                     <div>
-                        <h2>
-                            Buying Power: ${portfolio.buyingPower}
-                        </h2>
                         <h2>
                             {stockTicker} owned: {ownedStockObj.amount}
                         </h2>
