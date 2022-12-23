@@ -26,7 +26,9 @@ export default function BuyStockForm({ setHasSubmitted, stockName, stockPrice })
                     quantity: quantity,
                     order_type: "buy"
                 })
-            ).then(() => setHasSubmitted((prevValue) => !prevValue));
+            )
+                .then(() => setHasSubmitted((prevValue) => !prevValue))
+                .then(() => setQuantity(0))
             return buyStock
         }
     }
