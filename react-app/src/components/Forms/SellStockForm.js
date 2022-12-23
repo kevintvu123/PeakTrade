@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { postTransactionThunk } from "../../store/portfolio";
 
-export default function BuyStockForm({ setHasSubmitted, stockName, stockPrice }) {
+export default function SellStockForm({ setHasSubmitted, stockName, stockPrice }) {
     const dispatch = useDispatch();
     const { stockTicker } = useParams();
 
@@ -18,16 +18,16 @@ export default function BuyStockForm({ setHasSubmitted, stockName, stockPrice })
         setErrors(errors)
 
         if (!errors.length) {
-            const buyStock = await dispatch(
+            const sellStock = await dispatch(
                 postTransactionThunk({
                     ticker: stockTicker,
                     name: stockName,
                     price: stockPrice,
                     quantity: quantity,
-                    order_type: "buy"
+                    order_type: "sell"
                 })
             ).then(() => setHasSubmitted((prevValue) => !prevValue));
-            return buyStock
+            return sellStock
         }
     }
 
@@ -46,7 +46,7 @@ export default function BuyStockForm({ setHasSubmitted, stockName, stockPrice })
                         required
                     />
                 </div>
-                <button type="submit">Buy Stock</button>
+                <button type="submit">Sell Stock</button>
             </form>
         </div>
     )

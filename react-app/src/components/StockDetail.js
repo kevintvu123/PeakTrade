@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getUserPortfolioThunk } from "../store/portfolio"
 import BuyStockForm from "./Forms/BuyStockForm"
+import SellStockForm from "./Forms/SellStockForm"
 
 export default function StockDetail() {
     const dispatch = useDispatch()
@@ -45,7 +46,8 @@ export default function StockDetail() {
             <h2>{stockName}</h2>
             <h2>${stockPrice}</h2>
             <div>
-                <BuyStockForm setHasSubmitted={setHasSubmitted} stockName={stockName} />
+                <BuyStockForm setHasSubmitted={setHasSubmitted} stockName={stockName} stockPrice={stockPrice} />
+                <SellStockForm setHasSubmitted={setHasSubmitted} stockName={stockName} stockPrice={stockPrice} />
                 <h1>
                     User Portfolio
                 </h1>

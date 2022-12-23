@@ -43,7 +43,7 @@ def handle_create_update_delete_transactions():
         # Calculating Total price to update User's buying power
         price = data["price"]
         quantity = data["quantity"]
-        total_price = (price) * int(quantity)
+        total_price = float(price) * float(quantity)
 
         if data["order_type"] == "buy":
 
@@ -92,7 +92,7 @@ def handle_create_update_delete_transactions():
                 new_amount = stock_in_portfolio.amount + int(data["amount"])
                 new_total_price = (
                     stock_in_portfolio.avg_stock_value * stock_in_portfolio.amount
-                ) + (int(data["quantity"]) * int(data["price"]))
+                ) + (int(data["quantity"]) * int(float(data["price"])))
                 new_stock_avg_price = new_total_price / new_amount
 
                 data["avg_stock_value"] = new_stock_avg_price
@@ -115,7 +115,7 @@ def handle_create_update_delete_transactions():
                     stock_in_portfolio.avg_stock_value = data["avg_stock_value"]
 
                     # Updating User's Buying Power
-                    user.buying_power = user.buying_power - total_price
+                    user.buying_power = user.buying_power - float(total_price)
 
                     db.session.add(create_transaction)
                     db.session.commit()
@@ -131,7 +131,7 @@ def handle_create_update_delete_transactions():
 
             if stock_in_portfolio:
                 # Sell all stocks (Delete)
-                if stock_in_portfolio.amount == data["quantity"]:
+                if stock_in_portfolio.amount == int(data["quantity"]):
                     # Creating new transaction instance
                     create_transaction = Transaction(
                         user_id=user_id,
@@ -143,7 +143,7 @@ def handle_create_update_delete_transactions():
                     )
 
                     # Update User Buying Power
-                    user.buying_power = user.buying_power + total_price
+                    user.buying_power = user.buying_power + float(total_price)
 
                     # Delete instance of stock in portfolio since User sold all stocks
                     db.session.add(create_transaction)
@@ -156,9 +156,9 @@ def handle_create_update_delete_transactions():
                     return responseObj
 
                 # Sell portion of stock (Update)
-                if stock_in_portfolio.amount > data["quantity"]:
+                if stock_in_portfolio.amount > int(data["quantity"]):
 
-                    new_amount = stock_in_portfolio.amount - data["quantity"]
+                    new_amount = stock_in_portfolio.amount - int(data["quantity"])
                     data["avg_stock_value"] = stock_in_portfolio.avg_stock_value
                     data["amount"] = new_amount
 
@@ -179,7 +179,7 @@ def handle_create_update_delete_transactions():
                         stock_in_portfolio.amount = data["amount"]
 
                         # Update User Buying Power
-                        user.buying_power = user.buying_power + total_price
+                        user.buying_power = user.buying_power + float(total_price)
 
                         db.session.add(create_transaction)
                         db.session.commit()
