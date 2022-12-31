@@ -6,6 +6,7 @@ import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import StockDetail from './components/StockDetail';
+import Homepage from './components/Homepage';
 import { authenticate } from './store/session';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -34,6 +35,7 @@ function App() {
           <SignUpForm />
         </Route>
         <Route path='/' exact={true} >
+          <Homepage />
         </Route>
         <Route path='/stocks/:stockTicker'>
           <StockDetail />
