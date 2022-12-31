@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getUserPortfolioThunk } from "../../store/portfolio"
 
 import OwnedStockPrice from "./OwnedStockPrice"
+import MiniStockChart from "./MiniStockChart"
 
 import styles from '../cssModules/OwnedStocks.module.css'
 import { useHistory } from "react-router-dom"
@@ -39,10 +40,10 @@ export default function OwnedStocks() {
                     >
                         <div className={styles.stockTickerSharesContainer}>
                             <div>{stock.ticker}</div>
-                            <div>{stock.amount} shares</div>
+                            <div>{stock.amount} Shares</div>
                         </div>
                         <div className={styles.miniStockChartContainer}>
-
+                            <MiniStockChart stockTicker={stock.ticker} />
                         </div>
                         <div className={styles.stockPriceContainer}>
                             <OwnedStockPrice stockTicker={stock.ticker} />

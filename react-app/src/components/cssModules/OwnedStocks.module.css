@@ -30,14 +30,14 @@
 }
 
 .stockTickerSharesContainer {
-    width: 80px;
+    width: 65px;
     /* border: 1px solid green; */
 }
 
 .miniStockChartContainer {
     width: 60px;
     height: 34px;
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 .stockPriceContainer {
