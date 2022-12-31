@@ -14,6 +14,7 @@ export default function StockDetail() {
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [stockName, setStockName] = useState("")
     const [stockPrice, setStockPrice] = useState()
+    const [scrollingStockPrice, setScrollingStockPrice] = useState()
     const [stockDesc, setStockDesc] = useState("")
     const [transaction, setTransaction] = useState("buy")
 
@@ -51,10 +52,10 @@ export default function StockDetail() {
                 <div className={styles.mainContainer}>
                     <div className={styles.leftHalfContainer}>
                         <div className={styles.stockNameContainer}>{stockName}</div>
-                        <div className={styles.stockPriceContainer}>${parseFloat(stockPrice).toFixed(2)}</div>
+                        <div className={styles.stockPriceContainer}>${scrollingStockPrice ? parseFloat(scrollingStockPrice).toFixed(2) : parseFloat(stockPrice).toFixed(2)}</div>
                         <div className={styles.percentChangeContainer}>Percent Change (TBD)</div>
                         <div className={styles.stockChartContainer}>
-                            <StockChart />
+                            <StockChart stockTicker={stockTicker} setScrollingStockPrice={setScrollingStockPrice} />
                         </div>
                         <div className={styles.valueCostAnalyticsContainer}>
                             <div className={styles.marketValueContainer}>
