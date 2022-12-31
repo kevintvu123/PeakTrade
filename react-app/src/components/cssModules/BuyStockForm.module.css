@@ -1,0 +1,67 @@
+.buyFormContainer {
+    height: 340px;
+    padding: 12px 24px;
+    font-size: 13px;
+    border-bottom: 1px solid #30363A;
+    /* border: 1px solid red; */
+}
+
+.eachFormRowContainer {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* border: 1px solid blue; */
+}
+
+.eachFormRowContainer>input {
+    width: 98px;
+    height: 34px;
+    padding: 0 6px;
+    color: white;
+    background-color: #1e2124;
+    border: 1px solid #30363A;
+    text-align: right;
+}
+
+.eachFormRowContainer>input:focus {
+    outline: none;
+    border: 1px solid #00C805
+}
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.marketPriceContainer {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #30363A;
+}
+
+.errorContainer {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reviewOrderButton {
+    height: 45px;
+    font-weight: 600;
+    color: black;
+    background-color: #00C805;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    /* border: 1px white solid; */
+}
+
+.reviewOrderButton:hover {
+    cursor: pointer;
+    background-color: #1bdb22;
+}

@@ -1,0 +1,46 @@
+.stockListContainer {
+    /* border: 1px solid red; */
+    height: 810px;
+    border-radius: 5px;
+    border: 1px solid #40494E;
+}
+
+.ownedStocksHeader {
+    height: 51px;
+    border-bottom: 1px solid #40494E;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.eachOwnedStockContainer {
+    height: 60px;
+    padding: 0 24px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* border: 1px solid red; */
+}
+
+.eachOwnedStockContainer:hover {
+    cursor: pointer;
+}
+
+.stockTickerSharesContainer {
+    width: 80px;
+    /* border: 1px solid green; */
+}
+
+.miniStockChartContainer {
+    width: 60px;
+    height: 34px;
+    border: 1px solid green;
+}
+
+.stockPriceContainer {
+    width: 50px;
+    /* border: 1px solid purple; */
+}

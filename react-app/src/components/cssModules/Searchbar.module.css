@@ -17,8 +17,7 @@
 
 .searchResults {
     margin-top: 10px;
-
-    background-color: white;
+    background-color: #1e2124;
     z-index: 5;
 }
 
@@ -32,5 +31,5 @@
 
 .eachSearchResult:hover {
     cursor: pointer;
-    background-color: #c4c4c4;
+    background-color: #363b41;
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { postTransactionThunk } from "../../store/portfolio";
+import styles from "../cssModules/BuyStockForm.module.css"
 
 export default function BuyStockForm({ setHasSubmitted, stockName, stockPrice }) {
     const dispatch = useDispatch();
@@ -10,8 +11,7 @@ export default function BuyStockForm({ setHasSubmitted, stockName, stockPrice })
     const [errors, setErrors] = useState([])
     const [quantity, setQuantity] = useState(0)
 
-    const handleBuyStock = async (e) => {
-        e.preventDefault();
+    const handleBuyStock = async () => {
 
         const errors = [];
 
@@ -33,23 +33,51 @@ export default function BuyStockForm({ setHasSubmitted, stockName, stockPrice })
         }
     }
 
+    const preventMinus = (e) => {
+        if (e.code === 'Minus') {
+            e.preventDefault();
+        }
+    };
+
     return (
-        <div>
-            <form onSubmit={handleBuyStock}>
-                <div>
-                    <label htmlFor="buyStockQuantity">
-                        Quantity
-                    </label>
-                    <input
-                        id="buyStockQuantity"
-                        type="number"
-                        value={quantity}
-                        onChange={(e) => setQuantity(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Buy Stock</button>
-            </form>
+        <div className={styles.buyFormContainer}>
+            <div className={styles.eachFormRowContainer}>
+                <div>Order Type</div>
+                <div>Market Order</div>
+            </div>
+            <div className={styles.eachFormRowContainer}>
+                <div>Buy In</div>
+                <div>Shares</div>
+            </div>
+            <div className={styles.eachFormRowContainer}>
+                <div>Shares</div>
+                <input
+                    type="number"
+                    placeholder="0"
+                    value={quantity}
+                    min="0"
+                    onKeyPress={preventMinus}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    required
+                />
+            </div>
+            <div className={styles.marketPriceContainer}>
+                <div>Market Price</div>
+                <div>${parseFloat(stockPrice).toFixed(2)}</div>
+            </div>
+            <div className={styles.eachFormRowContainer}>
+                <div>Estimated Cost</div>
+                <div>${parseFloat(parseFloat(stockPrice) * quantity).toFixed(2)}</div>
+            </div>
+            <div className={styles.errorContainer}>
+                <div></div>
+            </div>
+            <div
+                className={styles.reviewOrderButton}
+                onClick={() => handleBuyStock()}
+            >
+                Review order
+            </div>
         </div>
     )
 }

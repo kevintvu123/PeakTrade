@@ -54,6 +54,7 @@ const portfolioReducer = (state = {}, action) => {
     switch (action.type) {
         case GET_USER_PORTFOLIO:
             const responseObj = action.payload
+            responseObj["stocksArr"] = action.payload.stocks
             const stocksObj = normalizeStocks(action.payload.stocks)
             responseObj["stocks"] = stocksObj
             newState = { ...state, ...responseObj }
