@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { getUserPortfolioThunk } from "../store/portfolio"
-import BuyStockForm from "./Forms/BuyStockForm"
-import SellStockForm from "./Forms/SellStockForm"
-import styles from './cssModules/StockDetail.module.css'
+import { getUserPortfolioThunk } from "../../store/portfolio"
+import StockChart from "./StockChart"
+import BuyStockForm from "../Forms/BuyStockForm"
+import SellStockForm from "../Forms/SellStockForm"
+import styles from '../cssModules/StockDetail.module.css'
 
 export default function StockDetail() {
     const dispatch = useDispatch()
@@ -38,7 +39,7 @@ export default function StockDetail() {
                 setStockName(result['Name'])
                 setStockDesc(result['Description'])
             })
-    })
+    }, [url, url2])
 
     if (Object.keys(portfolio).length === 0) return null
 
@@ -52,7 +53,9 @@ export default function StockDetail() {
                         <div className={styles.stockNameContainer}>{stockName}</div>
                         <div className={styles.stockPriceContainer}>${parseFloat(stockPrice).toFixed(2)}</div>
                         <div className={styles.percentChangeContainer}>Percent Change (TBD)</div>
-                        <div className={styles.stockChartContainer}>Stock Chart (TBD)</div>
+                        <div className={styles.stockChartContainer}>
+                            <StockChart />
+                        </div>
                         <div className={styles.valueCostAnalyticsContainer}>
                             <div className={styles.marketValueContainer}>
                                 Your market value (TBD)

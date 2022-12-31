@@ -39,7 +39,7 @@ export default function OwnedStocks() {
                     >
                         <div className={styles.stockTickerSharesContainer}>
                             <div>{stock.ticker}</div>
-                            <div>{stock.amount} shares</div>
+                            <div>{stock.amount} Shares</div>
                         </div>
                         <div className={styles.miniStockChartContainer}>
 
