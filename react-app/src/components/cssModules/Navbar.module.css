@@ -10,6 +10,7 @@
 }
 
 nav {
+    z-index: 5;
     top: 0;
     position: sticky;
     background-color: black;
