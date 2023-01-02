@@ -68,7 +68,7 @@ const LoginForm = () => {
               />
               <button className={styles.loginButton} type='submit'>Login</button>
             </div>
-            <p className={styles.signUpLinkContainer}>Not on PeakTrade? <Link to="/signup" className={styles.signUpLink}>Create an account</Link></p>
+            <p className={styles.signUpLinkContainer}>Not on PeakTrade? <Link to="/sign-up" className={styles.signUpLink}>Create an account</Link></p>
           </form>
         </div>
       </div>

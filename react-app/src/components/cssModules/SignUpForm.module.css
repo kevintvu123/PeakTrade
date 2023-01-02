@@ -1,0 +1,101 @@
+.bodyContainer {
+    height: 100vh;
+    display: flex;
+    overflow-y: hidden;
+}
+
+.leftSignUp {
+    width: 50%;
+    background-color: #005F32;
+}
+
+.rightSignUp {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: black;
+}
+
+.signupFormContainer {
+    width: 100%;
+    padding: 55px;
+    /* border: 1px solid black; */
+}
+
+.signupFormHeader {
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.nameContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.emailContainer {
+    margin-bottom: 20px;
+}
+
+.nameContainer>input {
+    width: 45%;
+    height: 25px;
+    font-size: 18px;
+    padding: 14px 10px;
+    border: 1px solid white;
+}
+
+.emailContainer>input {
+    width: 96%;
+    height: 25px;
+    font-size: 18px;
+    padding: 14px 10px;
+    border: 1px solid white;
+}
+
+.nameContainer>input:hover {
+    border-color: #adadad;
+}
+
+.emailContainer>input:hover {
+    border-color: #adadad;
+}
+
+.nameContainer>input:focus {
+    outline: none;
+    border-color: black;
+}
+
+.emailContainer>input:focus {
+    outline: none;
+    border-color: black;
+}
+
+.signupButton {
+    margin-top: 15px;
+    background-color: black;
+    color: white;
+    width: 140px;
+    height: 45px;
+    border-radius: 26px;
+    font-weight: 600;
+}
+
+.signupButton:hover {
+    cursor: pointer;
+    background-color: rgb(43, 43, 43);
+}
+
+.logInContainer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    font-size: 13px;
+}
+
+.loginLink {
+    color: black;
+    font-size: 13px;
+    font-weight: 600;
+}
