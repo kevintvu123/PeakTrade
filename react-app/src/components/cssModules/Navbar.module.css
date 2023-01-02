@@ -1,16 +1,23 @@
 .bigContainer {
+    height: 30px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-}
-
-nav {
+    padding: 20px 45px;
+    z-index: 5;
     top: 0;
     position: sticky;
     background-color: black;
+    /* border: 1px white solid; */
+}
+
+.logo {
+    height: 40px;
+}
+
+.logoSearchContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
 }

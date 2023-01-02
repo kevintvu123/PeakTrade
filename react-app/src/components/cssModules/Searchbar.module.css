@@ -6,13 +6,27 @@
 }
 
 .searchInputs {
-    width: 100%;
+    /* width: 100%; */
     height: 30px;
 }
 
 .searchInputs>input {
+    margin-top: 4px;
     width: 98%;
     height: 30px;
+    background-color: black;
+    color: white;
+    border: #30363A 1px solid;
+    border-radius: 4px;
+}
+
+.searchInputs>input:hover {
+    background-color: #1E2124;
+}
+
+.searchInputs>input:focus {
+    background-color: #1E2124;
+    outline: none;
 }
 
 .searchResults {

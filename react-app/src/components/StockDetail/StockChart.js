@@ -49,9 +49,7 @@ export default function StockChart({ stockTicker, setScrollingStockPrice }) {
 
             return (
                 <div>
-                    <p>
-                        {data.date}
-                    </p>
+                    {data.date}
                 </div>
             );
         }
@@ -65,7 +63,7 @@ export default function StockChart({ stockTicker, setScrollingStockPrice }) {
             <LineChart data={stockChartData} transitionDuration={150}>
                 <XAxis dataKey="date" hide />
                 <YAxis domain hide />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip />} wrapperStyle={{ border: '0' }} />
                 <Line type="monotone" dataKey="value" stroke="#00C805" strokeWidth={1.5} dot={false} />
             </LineChart>
         </ResponsiveContainer>
