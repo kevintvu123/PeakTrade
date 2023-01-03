@@ -46,9 +46,19 @@ class Group(db.Model):
     def _name(self, name):
         self.name = name
 
+    def to_dict_base(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "ownerId": self.owner_id,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+        }
+
     def to_dict(self):
         return {
             "id": self.id,
+            "name": self.name,
             "ownerId": self.owner_id,
             "members": [member.to_dict() for member in self.members],
             "createdAt": self.created_at,
