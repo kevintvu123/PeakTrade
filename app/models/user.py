@@ -47,4 +47,5 @@ class User(db.Model, UserMixin):
             "transactions": [
                 transaction.to_dict() for transaction in self.transactions
             ],
+            "groups": [group.to_dict_base() for group in self.groups],
         }
