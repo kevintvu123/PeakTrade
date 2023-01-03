@@ -7,11 +7,26 @@ from .auth_routes import validation_errors_to_error_messages
 group_routes = Blueprint("groups", __name__)
 
 
+@group_routes.route("/current")
+@login_required
+def get_current_groups():
+    """
+    Query for all groups that member is in
+    """
+    user_id = current_user.id
+    user = User.query.get(user_id)
+
+    groupArr = [group.to_dict() for group in user.groups]
+
+    response = {"groups": groupArr}
+    return response
+
+
 @group_routes.route("/<int:group_id>")
 @login_required
 def get_group_details(group_id):
     """
-    Query for details of a server by server id
+    Query for details of a group by group id
     """
 
     group = Group.query.get(group_id)
@@ -26,7 +41,7 @@ def get_group_details(group_id):
 @login_required
 def post_group_member(group_id):
     """
-    Adds current user to server id
+    Adds current user to group id
     """
 
     data = request.get_json()
@@ -40,8 +55,6 @@ def post_group_member(group_id):
         return {"message": "Group couldn't be found"}, 404
 
     group_info = group.to_dict()
-    print(group_info["name"] == data["name"])
-    print(data["name"])
 
     if group_info["name"] != data["name"]:
         return {"message": "Group couldn't be found"}, 404
