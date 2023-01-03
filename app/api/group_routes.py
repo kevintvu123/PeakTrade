@@ -99,22 +99,23 @@ def update_group(group_id):
     """
     Update a Group name only if user owns group
     """
-
     data = request.get_json()
     data["csrf_token"] = request.cookies["csrf_token"]
     user_id = current_user.id
 
     form = GroupForm(**data)
+    group = Group.query.get(group_id)
+    # print(group.name)
 
-    group = Group.query.get(group_id).to_dict()
+    group_info = group.to_dict()
 
-    if group["ownerId"] is not user_id:
+    if group_info["ownerId"] is not user_id:
         return {"errors": "You do not own this group"}, 401
 
     if group and form.validate_on_submit():
-        group["name"] = data["name"]
+        group.name = data["name"]  # Using group['name'] will not work
         db.session.commit()
-        return group
+        return group.to_dict()
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 

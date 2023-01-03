@@ -6,12 +6,14 @@ import App from './App';
 import configureStore from './store';
 
 import * as portfolioActions from "./store/portfolio"
+import * as groupActions from "./store/group"
 
 const store = configureStore();
 
 if (process.env.NODE_ENV !== "production") {
   window.store = store; //expose store to window in development
   window.portfolioActions = portfolioActions;
+  window.groupActions = groupActions;
 }
 
 ReactDOM.render(
