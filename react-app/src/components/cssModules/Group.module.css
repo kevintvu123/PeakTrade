@@ -58,6 +58,21 @@
     height: 50px;
 }
 
+.nameDiv {
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+}
+
+.nameDiv>img {
+    height: 18px;
+    margin-left: 10px;
+}
+
+.nameDiv>img:hover {
+    cursor: pointer;
+}
+
 .groupDetailsContainer {
     width: 100%;
     display: flex;

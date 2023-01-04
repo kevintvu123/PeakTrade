@@ -3,12 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserGroupThunk } from "../../store/group";
 import { deleteGroupMemberThunk } from "../../store/group";
 import { deleteGroupThunk } from "../../store/group";
+
 import { GroupModal } from "../../context/GroupModal";
+import { EditGroupModal } from "../../context/EditGroupModal";
+
 import CreateGroupForm from "../Forms/CreateGroupForm";
 import JoinGroupForm from "../Forms/JoinGroupForm";
+import EditGroupForm from "../Forms/EditGroupForm";
 
 import styles from '../cssModules/Group.module.css'
 import plusIcon from '../../assets/plus-icon.png'
+import editIcon from '../../assets/edit-icon.png'
 
 
 export default function Group() {
@@ -16,7 +21,9 @@ export default function Group() {
 
     const [showMore, setShowMore] = useState(false)
     const [groupId, setGroupId] = useState()
+    const [editGroupId, setEditGroupId] = useState()
     const [showModal, setShowModal] = useState(false)
+    const [showEditModal, setShowEditModal] = useState(false)
     const [hasSubmitted, setHasSubmitted] = useState(false)
 
     const group = useSelector((state) => state.group)
@@ -74,9 +81,24 @@ export default function Group() {
                 groupsArr.map((group) => {
                     return (
                         <div className={styles.eachGroupContainer}>
+                            {showEditModal && (
+                                <EditGroupModal onClose={() => {
+                                    setShowEditModal(false)
+                                }}>
+                                    <EditGroupForm setShowEditModal={setShowEditModal} setHasSubmitted={setHasSubmitted} groupId={editGroupId} />
+                                </EditGroupModal>
+                            )}
                             <div className={styles.nameContainer}>
-                                <div>
-                                    {group.name}
+                                <div className={styles.nameDiv}>
+                                    <div>
+                                        {group.name}
+                                    </div>
+                                    {(group.ownerId === user.id) &&
+                                        <img src={editIcon} onClick={() => {
+                                            setShowEditModal(true)
+                                            setEditGroupId(group.id)
+                                        }} />
+                                    }
                                 </div>
                                 <div className={styles.showMoreDiv} onClick={() => {
                                     if ((showMore === true) && (group.id !== groupId)) {
