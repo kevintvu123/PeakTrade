@@ -119,6 +119,7 @@ const groupReducer = (state = {}, action) => {
     switch (action.type) {
         case GET_USER_GROUP:
             const responseObj = {}
+            responseObj["groupsArr"] = action.payload.groups
             const stocksObj = normalizeGroups(action.payload.groups)
             responseObj["groups"] = stocksObj
             newState = { ...responseObj }

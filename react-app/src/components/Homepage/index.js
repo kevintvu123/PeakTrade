@@ -1,10 +1,12 @@
-import OwnedStocks from './OwnedStocks'
-import PortfolioValue from './PortfolioValue'
-
-import styles from '../cssModules/Homepage.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getUserPortfolioThunk } from '../../store/portfolio'
+
+import OwnedStocks from './OwnedStocks'
+import PortfolioValue from './PortfolioValue'
+import Group from './Group'
+
+import styles from '../cssModules/Homepage.module.css'
 
 export default function Homepage() {
     const dispatch = useDispatch()
@@ -40,6 +42,9 @@ export default function Homepage() {
                         <div className={styles.buyingPowerContainer}>
                             <div>Buying Power</div>
                             <div>${formatCommas(buyingPower)}</div>
+                        </div>
+                        <div className={styles.groupContainer}>
+                            <Group />
                         </div>
                     </div>
                     <div className={styles.rightHalfContainer}>

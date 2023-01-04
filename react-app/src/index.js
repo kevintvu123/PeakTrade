@@ -5,6 +5,9 @@ import './index.css';
 import App from './App';
 import configureStore from './store';
 
+import { GroupModalProvider } from './context/GroupModal';
+import { EditGroupModalProvider } from './context/EditGroupModal';
+
 import * as portfolioActions from "./store/portfolio"
 import * as groupActions from "./store/group"
 
@@ -19,7 +22,11 @@ if (process.env.NODE_ENV !== "production") {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <GroupModalProvider>
+        <EditGroupModalProvider>
+          <App />
+        </EditGroupModalProvider>
+      </GroupModalProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
