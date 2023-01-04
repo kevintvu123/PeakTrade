@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import configureStore from './store';
+import { GroupModalProvider } from './context/GroupModal';
 
 import * as portfolioActions from "./store/portfolio"
 import * as groupActions from "./store/group"
@@ -19,7 +20,9 @@ if (process.env.NODE_ENV !== "production") {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <GroupModalProvider>
+        <App />
+      </GroupModalProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -21,3 +21,7 @@
     justify-content: space-between;
     width: 50%;
 }
+
+.accountNavLinks:hover {
+    cursor: pointer;
+}
