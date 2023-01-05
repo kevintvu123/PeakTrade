@@ -39,11 +39,14 @@ function EditGroupForm({ setHasSubmitted, setShowEditModal, groupId }) {
                     className={styles.createGroupInput}
                     type="text"
                     value={groupName}
-                    onChange={(e) => setGroupName(e.target.value)}
+                    onChange={(e) => {
+                        setGroupName(e.target.value)
+                        setErrors([])
+                    }}
                     placeholder="Group Name"
                     required
                 />
-                {/* <div className={styles.errorMap}>
+                <div className={styles.errorMap}>
                     {errors.length > 0 && (
                         <div>
                             {errors.map((error) => (
@@ -51,7 +54,7 @@ function EditGroupForm({ setHasSubmitted, setShowEditModal, groupId }) {
                             ))}
                         </div>
                     )}
-                </div> */}
+                </div>
                 <button className={styles.createGroupButton} type="submit">Change Name</button>
             </form>
         </div>

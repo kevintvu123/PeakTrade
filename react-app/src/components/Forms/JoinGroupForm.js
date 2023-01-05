@@ -9,6 +9,7 @@ function JoinGroupForm({ setHasSubmitted, setShowModal }) {
     const [groupName, setGroupName] = useState("");
     const [groupId, setGroupId] = useState()
     const [errors, setErrors] = useState([]);
+    const [showError, setShowError] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,10 +19,15 @@ function JoinGroupForm({ setHasSubmitted, setShowModal }) {
         setErrors(errors);
 
         if (!errors.length) {
-            setShowModal(false);
             const submitGroupMember = await dispatch(
                 postGroupMemberThunk({ name: groupName }, groupId)
-            ).then(() => setHasSubmitted((prevValue) => !prevValue));
+            ).then(() => setHasSubmitted((prevValue) => !prevValue))
+                .then(() => setShowModal(false))
+                .catch((err) => {
+                    errors.push(err.error)
+                    setErrors(errors)
+                    return setShowError(true)
+                })
             return submitGroupMember;
         }
     };
@@ -46,15 +52,15 @@ function JoinGroupForm({ setHasSubmitted, setShowModal }) {
                     placeholder="Group Id"
                     required
                 />
-                {/* <div className={styles.errorMap}>
-                    {errors.length > 0 && (
+                <div className={styles.errorMap}>
+                    {showError && !!errors.length && (
                         <div>
                             {errors.map((error) => (
                                 <div key={error}>{error}</div>
                             ))}
                         </div>
                     )}
-                </div> */}
+                </div>
                 <button className={styles.createGroupButton} type="submit">Join Group</button>
             </form>
         </div>

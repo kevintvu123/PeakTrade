@@ -4,6 +4,7 @@ import { getUserPortfolioThunk } from '../../store/portfolio'
 
 import OwnedStocks from './OwnedStocks'
 import PortfolioValue from './PortfolioValue'
+import PortfolioChart from './PortfolioChart'
 import Group from './Group'
 
 import styles from '../cssModules/Homepage.module.css'
@@ -34,10 +35,11 @@ export default function Homepage() {
                             <PortfolioValue />
                         </div>
                         <div className={styles.portfolioChangeContainer}>
-                            $0.00 (0.00%) Today
+                            
                         </div>
                         <div className={styles.portfolioChartContainer}>
-                            portfolioChart (In Progress)
+                            {/* <PortfolioChart /> */}
+                            Portfolio Chart (Currently Unavailable)
                         </div>
                         <div className={styles.buyingPowerContainer}>
                             <div>Buying Power</div>

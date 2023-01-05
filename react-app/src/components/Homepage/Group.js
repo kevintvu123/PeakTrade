@@ -19,6 +19,7 @@ import editIcon from '../../assets/edit-icon.png'
 export default function Group() {
     const dispatch = useDispatch()
 
+    const [loaded, setLoaded] = useState(false)
     const [showMore, setShowMore] = useState(false)
     const [groupId, setGroupId] = useState()
     const [editGroupId, setEditGroupId] = useState()
@@ -30,10 +31,14 @@ export default function Group() {
     const user = useSelector(state => state.session.user);
 
     useEffect(() => {
-        dispatch(getUserGroupThunk())
+        (async () => {
+            await dispatch(getUserGroupThunk())
+            setLoaded(true)
+        })();
+
     }, [dispatch, hasSubmitted])
 
-    if (Object.keys(group).length === 0) return null
+    if (!loaded) return null
 
     const handleLeaveGroup = async (groupId) => {
         const leaveGroup = await dispatch(deleteGroupMemberThunk(groupId))

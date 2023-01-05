@@ -23,6 +23,7 @@ export default function StockDetail() {
     const [stock52High, setStock52High] = useState("-")
     const [stock52Low, setStock52Low] = useState("-")
     const [transaction, setTransaction] = useState("buy")
+    const [transactionLoading, setTransactionLoading] = useState(false)
 
     const portfolio = useSelector((state) => state.portfolio)
 
@@ -55,9 +56,9 @@ export default function StockDetail() {
     }, [url, url2])
 
     const portfolioBool = Object.keys(portfolio).length
-
     if (!portfolioBool) return null
-    // if (!stockPrice) return null
+
+    const buyingPower = portfolio.buyingPower
 
     const ownedStockObj = portfolio.stocks[stockTicker] //returns undefined if stock isn't in portfolio
     const calcMarketValue = ownedStockObj ? ownedStockObj.amount * stockPrice : null
@@ -103,7 +104,7 @@ export default function StockDetail() {
                                 <div className={styles.avgCostContainer}>
                                     Your average cost
                                     <div className={styles.stockValueContainer}>
-                                        ${calcAvgCost}
+                                        ${calcAvgCost.toFixed(2)}
                                     </div>
                                     <div className={styles.totalReturnContainer}>
                                         <div>Shares</div>
@@ -139,33 +140,42 @@ export default function StockDetail() {
                         </div>
                     </div>
                     <div className={styles.rightHalfContainer}>
-                        <div className={styles.transactionContainer}>
-                            <div className={styles.transactionToggleContainer}>
-                                <div
-                                    className={styles.buyStockToggle}
-                                    style={{ color: transaction === "buy" ? '#00C805' : "white" }}
-                                    onClick={() => setTransaction("buy")}
-                                >
-                                    Buy {stockTicker}
+                        {transactionLoading &&
+                            <div className={styles.transactionLoadingContainer}>
+                                <div className={styles.loadingSpinner}></div>
+                            </div>
+                        }
+                        {!transactionLoading &&
+                            <div className={styles.transactionContainer}>
+                                <div className={styles.transactionToggleContainer}>
+                                    <div
+                                        className={styles.buyStockToggle}
+                                        style={{ color: transaction === "buy" ? '#00C805' : "white" }}
+                                        onClick={() => setTransaction("buy")}
+                                    >
+                                        Buy {stockTicker}
+                                    </div>
+                                    {ownedStockObj &&
+                                        <div
+                                            className={styles.sellStockToggle}
+                                            style={{ color: transaction === "sell" ? '#00C805' : "white" }}
+                                            onClick={() => setTransaction("sell")}
+                                        >
+                                            Sell {stockTicker}
+                                        </div>
+                                    }
                                 </div>
-                                <div
-                                    className={styles.sellStockToggle}
-                                    style={{ color: transaction === "sell" ? '#00C805' : "white" }}
-                                    onClick={() => setTransaction("sell")}
-                                >
-                                    Sell {stockTicker}
+                                {(transaction === "buy") &&
+                                    <BuyStockForm setHasSubmitted={setHasSubmitted} stockName={stockName} stockPrice={stockPrice} buyingPower={buyingPower} setTransactionLoading={setTransactionLoading} />
+                                }
+                                {(transaction === "sell") &&
+                                    <SellStockForm setHasSubmitted={setHasSubmitted} stockName={stockName} stockPrice={stockPrice} setTransaction={setTransaction} ownedAmt={ownedStockObj?.amount} setTransactionLoading={setTransactionLoading} />
+                                }
+                                <div className={styles.buyingPowerContainer}>
+                                    ${parseFloat(portfolio.buyingPower).toFixed(2)} buying power available
                                 </div>
                             </div>
-                            {(transaction === "buy") &&
-                                <BuyStockForm setHasSubmitted={setHasSubmitted} stockName={stockName} stockPrice={stockPrice} />
-                            }
-                            {(transaction === "sell") &&
-                                <SellStockForm setHasSubmitted={setHasSubmitted} stockName={stockName} stockPrice={stockPrice} />
-                            }
-                            <div className={styles.buyingPowerContainer}>
-                                ${parseFloat(portfolio.buyingPower).toFixed(2)} buying power available
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { postTransactionThunk } from "../../store/portfolio";
 import styles from "../cssModules/BuyStockForm.module.css"
 
-export default function BuyStockForm({ setHasSubmitted, stockName, stockPrice }) {
+export default function BuyStockForm({ setHasSubmitted, stockName, stockPrice, buyingPower, setTransactionLoading }) {
     const dispatch = useDispatch();
     const { stockTicker } = useParams();
 
@@ -15,9 +15,20 @@ export default function BuyStockForm({ setHasSubmitted, stockName, stockPrice })
 
         const errors = [];
 
+
+        if (!quantity) {
+            errors.push("Please enter a quantity")
+        }
+
+        if ((stockPrice * quantity) > buyingPower) {
+            errors.push("Not Enough Buying Power")
+        }
+
         setErrors(errors)
 
         if (!errors.length) {
+            setTransactionLoading(true)
+            setTimeout(() => setTransactionLoading(false), 1000)
             const buyStock = await dispatch(
                 postTransactionThunk({
                     ticker: stockTicker,
@@ -70,11 +81,13 @@ export default function BuyStockForm({ setHasSubmitted, stockName, stockPrice })
                 <div>${parseFloat(parseFloat(stockPrice) * quantity).toFixed(2)}</div>
             </div>
             <div className={styles.errorContainer}>
-                <div></div>
+                {errors.map((error) => (
+                    <div key={error}>{error}</div>
+                ))}
             </div>
             <div
                 className={styles.reviewOrderButton}
-                onClick={() => handleBuyStock()}
+                onClick={() => { handleBuyStock() }}
             >
                 Review order
             </div>

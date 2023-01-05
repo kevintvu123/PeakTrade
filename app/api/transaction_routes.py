@@ -189,4 +189,4 @@ def handle_create_update_delete_transactions():
 
                         return responseObj
 
-    return "Something wasn't caught"
+    return {"error": "Please enter a valid quantity"}, 400

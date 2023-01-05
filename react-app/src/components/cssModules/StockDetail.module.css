@@ -150,6 +150,38 @@
     margin-bottom: 5px;
 }
 
+.transactionLoadingContainer {
+    width: 100%;
+    height: 495px;
+    position: sticky;
+    top: 110px;
+    border-radius: 5px;
+    border: 1px solid #40494E;
+    background-color: #1e2124;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingSpinner {
+    border: 5px solid black;
+    border-top: 5px solid #00C805;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .transactionContainer {
     width: 100%;
     height: 495px;
