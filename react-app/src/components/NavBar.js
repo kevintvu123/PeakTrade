@@ -10,7 +10,7 @@ const NavBar = () => {
     <div className={styles.bigContainer}>
       <div className={styles.logoSearchContainer}>
         <NavLink to='/main' exact={true} >
-          <img src={logo} className={styles.logo} />
+          <img src={logo} alt='logo' className={styles.logo} />
         </NavLink>
         <Search />
       </div>
