@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { postTransactionThunk } from "../../store/portfolio";
 import styles from "../cssModules/BuyStockForm.module.css"
 
-export default function SellStockForm({ setHasSubmitted, stockName, stockPrice }) {
+export default function SellStockForm({ setHasSubmitted, stockName, stockPrice, setTransaction, ownedAmt, setTransactionLoading }) {
     const dispatch = useDispatch();
     const { stockTicker } = useParams();
 
@@ -15,9 +15,20 @@ export default function SellStockForm({ setHasSubmitted, stockName, stockPrice }
 
         const errors = [];
 
+        if (!quantity) {
+            errors.push("Please enter a quantity")
+        }
+
+        if (quantity > ownedAmt) {
+            errors.push("You do not own enough shares")
+            setQuantity(0)
+        }
+
         setErrors(errors)
 
         if (!errors.length) {
+            setTransactionLoading(true)
+            setTimeout(() => setTransactionLoading(false), 1000)
             const sellStock = await dispatch(
                 postTransactionThunk({
                     ticker: stockTicker,
@@ -29,6 +40,11 @@ export default function SellStockForm({ setHasSubmitted, stockName, stockPrice }
             )
                 .then(() => setHasSubmitted((prevValue) => !prevValue))
                 .then(() => setQuantity(0))
+                .then(() => setTransaction('buy'))
+                .catch((err) => {
+                    errors.push(err.error);
+                    setErrors(errors)
+                })
             return sellStock
         }
     }
@@ -70,7 +86,9 @@ export default function SellStockForm({ setHasSubmitted, stockName, stockPrice }
                 <div>${parseFloat(parseFloat(stockPrice) * quantity).toFixed(2)}</div>
             </div>
             <div className={styles.errorContainer}>
-                <div></div>
+                {errors.map((error) => (
+                    <div key={error}>{error}</div>
+                ))}
             </div>
             <div
                 className={styles.reviewOrderButton}

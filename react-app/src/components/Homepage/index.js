@@ -35,7 +35,7 @@ export default function Homepage() {
                             <PortfolioValue />
                         </div>
                         <div className={styles.portfolioChangeContainer}>
-                            $0.00 (0.00%) Today
+                            
                         </div>
                         <div className={styles.portfolioChartContainer}>
                             {/* <PortfolioChart /> */}

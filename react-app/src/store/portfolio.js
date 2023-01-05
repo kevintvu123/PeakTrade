@@ -37,7 +37,8 @@ export const postTransactionThunk = (body) => async (dispatch) => {
         await dispatch(getUserPortfolioThunk());
         return data
     } else {
-        throw response;
+        const data = await response.json()
+        throw data
     }
 }
 
