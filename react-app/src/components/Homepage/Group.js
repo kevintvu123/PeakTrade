@@ -60,7 +60,7 @@ export default function Group() {
             <div className={styles.groupHeader}>
                 Groups
                 <div className={styles.iconContainer} onClick={() => setShowModal(true)}>
-                    <img src={plusIcon} />
+                    <img src={plusIcon} alt='plus icon' />
                 </div>
             </div>
             {showModal && (
@@ -99,7 +99,7 @@ export default function Group() {
                                         {group.name}
                                     </div>
                                     {(group.ownerId === user.id) &&
-                                        <img src={editIcon} onClick={() => {
+                                        <img src={editIcon} alt='edit icon' onClick={() => {
                                             setShowEditModal(true)
                                             setEditGroupId(group.id)
                                         }} />

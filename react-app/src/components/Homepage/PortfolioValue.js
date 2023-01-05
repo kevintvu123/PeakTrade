@@ -32,7 +32,7 @@ export default function PortfolioValue() {
             setOwnedStocksMarketVal(sum);
         }
         fetchData();
-    }, [stocksArr]);
+    }, [stocksArr, apiKey]);
 
     if (Object.keys(portfolio).length === 0) return null
 
