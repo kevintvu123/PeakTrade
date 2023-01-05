@@ -26,6 +26,7 @@ export default function PortfolioValue() {
                     `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock.ticker}&apikey=${apiKey}`
                 );
                 const json = await response.json();
+                // console.log(json)
                 const price = (json['Global Quote']['05. price']) * stock.amount;
                 sum += parseFloat(price);
             }
@@ -44,7 +45,7 @@ export default function PortfolioValue() {
 
     return (
         <div>
-            ${formatCommas((parseFloat(ownedStocksMarketVal) + parseFloat(buyingPower)).toFixed(2))}
+            ${formatCommas(parseFloat(ownedStocksMarketVal).toFixed(2))}
         </div>
     )
 }

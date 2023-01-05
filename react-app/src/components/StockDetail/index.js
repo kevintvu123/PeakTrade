@@ -17,7 +17,7 @@ export default function StockDetail() {
     const [stockChange, setStockChange] = useState()
     const [stockChangePercent, setStockChangePercent] = useState()
     const [scrollingStockPrice, setScrollingStockPrice] = useState()
-    const [stockDesc, setStockDesc] = useState("")
+    const [stockDesc, setStockDesc] = useState("No company information available")
     const [stockMarketCap, setStockMarketCap] = useState("-")
     const [stockPERatio, setStockPERatio] = useState("-")
     const [stock52High, setStock52High] = useState("-")
@@ -34,8 +34,12 @@ export default function StockDetail() {
     const apiKey = process.env.REACT_APP_API_KEY
     const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stockTicker}&apikey=${apiKey}`
     const url2 = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${stockTicker}&apikey=${apiKey}`
+    const url3 = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${stockTicker}&apikey=${apiKey}`
 
     useEffect(() => {
+        fetch(url3) //Fetches stockName from stockTicker
+            .then(res => res.json())
+            .then(result => setStockName(result['bestMatches'][0]['2. name']))
         fetch(url) //Fetches current market value of stock
             .then(res => res.json())
             .then((result) => {
@@ -46,12 +50,13 @@ export default function StockDetail() {
         fetch(url2) //Fetches Full name with stock ticker
             .then(res => res.json())
             .then((result) => {
-                setStockName(result['Name'])
-                setStockDesc(result['Description'])
-                setStockMarketCap(result['MarketCapitalization'])
-                setStockPERatio(result['PERatio'])
-                setStock52High(result['52WeekHigh'])
-                setStock52Low(result['52WeekLow'])
+                if (result['Description']) {
+                    setStockDesc(result['Description'])
+                    setStockMarketCap(result['MarketCapitalization'])
+                    setStockPERatio(result['PERatio'])
+                    setStock52High(result['52WeekHigh'])
+                    setStock52Low(result['52WeekLow'])
+                }
             })
     }, [url, url2])
 

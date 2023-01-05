@@ -9,6 +9,7 @@ export default function Search() {
 
     const [keyword, setKeyword] = useState('')
     const [searchResults, setSearchResults] = useState([])
+    // const [inputStatus, setInputStatus] = useState(false)
 
     const apiKey = process.env.REACT_APP_API_KEY
     const url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keyword}&apikey=${apiKey}`
@@ -31,6 +32,9 @@ export default function Search() {
         setKeyword('')
     }
 
+    //filters stocks with period in ticker b/c there is no result on detail page
+    const filteredStocks = searchResults?.filter(stock => !stock['1. symbol'].includes('.'))
+
     return (
         <div className={styles.searchBarDiv}>
             <div className={styles.searchInputs}>
@@ -44,18 +48,20 @@ export default function Search() {
                     placeholder="Search"
                 />
             </div>
-            <div className={styles.searchResults}>
-                {(!!searchResults.length) && (
-                    searchResults.map((result) => {
-                        return (
-                            <div key={result['1. symbol']} className={styles.eachSearchResult} onClick={() => redirectStockDetail(result['1. symbol'])}>
-                                <div>{result['1. symbol']}</div>
-                                <div>{result['2. name']}</div>
-                            </div>
-                        )
-                    })
-                )}
-            </div>
+            {!!keyword.length && 
+                <div className={styles.searchResults} >
+                    {(!!filteredStocks.length) && (
+                        filteredStocks.map((result) => {
+                            return (
+                                <div key={result['1. symbol']} className={styles.eachSearchResult} onClick={() => redirectStockDetail(result['1. symbol'])}>
+                                    <div>{result['1. symbol']}</div>
+                                    <div>{result['2. name']}</div>
+                                </div>
+                            )
+                        })
+                    )}
+                </div>
+            }
         </div>
     )
 }
