@@ -43,15 +43,17 @@ export default function StockChart({ stockTicker, setScrollingStockPrice }) {
 
     const CustomTooltip = (props) => { //Used by Rechart library to bring up date and set price when mousing over data points
         if (props.active) {
-            const data = props.payload[0].payload;
 
-            setScrollingStockPrice(data.value)
+            if (props.payload[0]) {
+                const data = props.payload[0].payload;
+                setScrollingStockPrice(data.value)
+                return (
+                    <div>
+                        {data.date}
+                    </div>
+                );
+            }
 
-            return (
-                <div>
-                    {data.date}
-                </div>
-            );
         }
 
         setScrollingStockPrice() //necessary to bring back current market price

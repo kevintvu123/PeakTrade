@@ -40,6 +40,10 @@
     /* border: 1px solid green; */
 }
 
+.miniStockChart:hover {
+    cursor: pointer;
+}
+
 .stockPriceContainer {
     width: 50px;
     /* border: 1px solid purple; */

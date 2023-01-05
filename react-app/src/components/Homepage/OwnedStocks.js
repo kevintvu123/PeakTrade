@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getUserPortfolioThunk } from "../../store/portfolio"
 
@@ -11,6 +11,8 @@ import { useHistory } from "react-router-dom"
 export default function OwnedStocks() {
     const dispatch = useDispatch()
     const history = useHistory()
+
+    const [graphLoading, setGraphLoading] = useState(false)
 
     const portfolio = useSelector((state) => state.portfolio)
 
@@ -43,7 +45,9 @@ export default function OwnedStocks() {
                             <div>{stock.amount} Shares</div>
                         </div>
                         <div className={styles.miniStockChartContainer}>
-                            <MiniStockChart stockTicker={stock.ticker} />
+                            {!graphLoading &&
+                                <MiniStockChart stockTicker={stock.ticker} setGraphLoading={setGraphLoading} />
+                            }
                         </div>
                         <div className={styles.stockPriceContainer}>
                             <OwnedStockPrice stockTicker={stock.ticker} />

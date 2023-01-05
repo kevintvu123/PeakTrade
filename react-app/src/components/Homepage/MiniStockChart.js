@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 
-export default function MiniStockChart({ stockTicker }) {
+export default function MiniStockChart({ stockTicker, setGraphLoading }) {
     const [stockChartData, setStockChartData] = useState()
 
     const YHapiKey = process.env.REACT_APP_YH_API_KEY
@@ -28,6 +28,7 @@ export default function MiniStockChart({ stockTicker }) {
 
                 setStockChartData(data)
             })
+            .then(() => setGraphLoading(false))
             .catch(err => console.error('error:' + err))
     }, [YHapiKey, yhUrl])
 

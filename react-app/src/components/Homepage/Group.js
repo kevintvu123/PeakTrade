@@ -85,7 +85,7 @@ export default function Group() {
             {!!groupBool && (
                 groupsArr.map((group) => {
                     return (
-                        <div className={styles.eachGroupContainer}>
+                        <div className={styles.eachGroupContainer} key={group.id}>
                             {showEditModal && (
                                 <EditGroupModal onClose={() => {
                                     setShowEditModal(false)
