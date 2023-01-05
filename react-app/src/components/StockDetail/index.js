@@ -58,7 +58,7 @@ export default function StockDetail() {
                     setStock52Low(result['52WeekLow'])
                 }
             })
-    }, [url, url2])
+    }, [url, url2, url3])
 
     const portfolioBool = Object.keys(portfolio).length
     if (!portfolioBool) return null
@@ -99,7 +99,7 @@ export default function StockDetail() {
                                 <div className={styles.marketValueContainer}>
                                     Your market value
                                     <div className={styles.stockValueContainer}>
-                                        ${calcMarketValue}
+                                        ${calcMarketValue.toFixed(2)}
                                     </div>
                                     <div className={styles.totalReturnContainer}>
                                         <div>Total return</div>

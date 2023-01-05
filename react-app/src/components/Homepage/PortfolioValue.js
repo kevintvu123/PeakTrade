@@ -37,7 +37,7 @@ export default function PortfolioValue() {
 
     if (Object.keys(portfolio).length === 0) return null
 
-    const buyingPower = ((portfolio.buyingPower.toFixed(2)))
+    // const buyingPower = ((portfolio.buyingPower.toFixed(2)))
 
     function formatCommas(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
