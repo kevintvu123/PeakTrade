@@ -52,12 +52,12 @@ def post_group_member(group_id):
     group = Group.query.get(group_id)
 
     if not group:
-        return {"message": "Group couldn't be found"}, 404
+        return {"error": "Group couldn't be found"}, 404
 
     group_info = group.to_dict()
 
     if group_info["name"] != data["name"]:
-        return {"message": "Group couldn't be found"}, 404
+        return {"error": "Group couldn't be found"}, 404
 
     group.members.append(user)
     db.session.commit()

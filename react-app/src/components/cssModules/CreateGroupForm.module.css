@@ -45,3 +45,13 @@
     cursor: pointer;
     background-color: #1bdb22;
 }
+
+.errorMap {
+    font-size: 15px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    /* border: 1px solid red; */
+}

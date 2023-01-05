@@ -55,7 +55,8 @@ export const postGroupMemberThunk = (body, groupId) => async (dispatch) => {
         await dispatch(getUserGroupThunk());
         return data;
     } else {
-        throw response
+        const data = await response.json()
+        throw data
     }
 }
 
