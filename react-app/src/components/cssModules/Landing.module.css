@@ -1,0 +1,73 @@
+.bigContainer {
+    width: 100%;
+    height: 100vh;
+    /* border: 1px solid red; */
+}
+
+.landingNavBarContainer {
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    background-color: #002C15;
+    border-bottom: 1px solid #C3F53C;
+}
+
+.landingAppName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 185px;
+    border-right: 1px solid #C3F53C;
+}
+
+.nameContainer {
+    font-size: 24px;
+    color: #C3F53C;
+    /* font-weight: 600; */
+}
+
+.landingAppName>img {
+    height: 35px;
+    margin-left: 2px;
+    /* border: 1px solid red; */
+}
+
+
+.leftNavContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1.2%;
+    width: 220px;
+    /* border: 1px solid red; */
+}
+
+.leftNavContainer>button {
+    width: 102px;
+    height: 44px;
+    border-radius: 22px;
+    border: 1px solid #C3F53C;
+}
+
+.leftNavContainer>button:hover {
+    cursor: pointer;
+}
+
+.loginButton {
+    font-weight: 600;
+    margin-right: 10px;
+    background-color: #002C15;
+    color: #C3F53C;
+}
+
+.signupButton {
+    background-color: #C3F53C;
+    font-weight: 600;
+}
+
+.firstContainer {
+    height: 93%;
+    background-color: #002C15;
+    /* border: 1px solid red; */
+}

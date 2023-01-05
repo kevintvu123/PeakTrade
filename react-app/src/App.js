@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import StockDetail from './components/StockDetail';
 import Homepage from './components/Homepage';
+import Landing from './components/Landing';
 import { authenticate } from './store/session';
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
     <BrowserRouter>
       {user && <NavBar />}
       <Switch>
+        <Route path='/' exact={true}>
+          <Landing />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
