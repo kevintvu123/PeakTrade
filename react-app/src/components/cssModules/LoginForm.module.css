@@ -92,3 +92,19 @@
     color: black;
     font-weight: 600;
 }
+
+.demoLink {
+    color: black;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.demoLink:hover {
+    cursor: pointer;
+}
+
+.errorDiv {
+    font-size: 15px;
+    margin-bottom: 2px;
+    color: red;
+}

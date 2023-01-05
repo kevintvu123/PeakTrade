@@ -99,3 +99,9 @@
     font-size: 13px;
     font-weight: 600;
 }
+
+.errorDiv {
+    font-size: 15px;
+    margin-bottom: 2px;
+    color: red;
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postGroupMemberThunk } from "../../store/group";
 import styles from "../cssModules/JoinGroupForm.module.css"
