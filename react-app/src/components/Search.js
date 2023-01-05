@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useHistory } from "react-router-dom"
 import styles from "./cssModules/Searchbar.module.css"
 
@@ -9,7 +9,8 @@ export default function Search() {
 
     const [keyword, setKeyword] = useState('')
     const [searchResults, setSearchResults] = useState([])
-    // const [inputStatus, setInputStatus] = useState(false)
+    const [inputStatus, setInputStatus] = useState(false)
+    const [enterDivStatus, setEnterDivStatus] = useState(false)
 
     const apiKey = process.env.REACT_APP_API_KEY
     const url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keyword}&apikey=${apiKey}`
@@ -46,10 +47,16 @@ export default function Search() {
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                     placeholder="Search"
+                    onBlur={() => {
+                        if (!enterDivStatus) {
+                            setInputStatus(false)
+                        }
+                    }}
+                    onFocus={() => setInputStatus(true)}
                 />
             </div>
-            {!!keyword.length && 
-                <div className={styles.searchResults} >
+            {!!keyword.length && inputStatus &&
+                <div className={styles.searchResults} onMouseEnter={() => setEnterDivStatus(true)} onMouseLeave={() => setEnterDivStatus(false)}>
                     {(!!filteredStocks.length) && (
                         filteredStocks.map((result) => {
                             return (
