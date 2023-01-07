@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 
 import styles from './cssModules/Landing.module.css'
-import logo from '../assets/RH-logo.png'
+import logo from '../assets/final-peaktrade-logo.png'
 
 
 export default function Landing() {

@@ -163,6 +163,14 @@
     align-items: center;
 }
 
+.stockDetailChartLoadingContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .loadingSpinner {
     border: 5px solid black;
     border-top: 5px solid #00C805;

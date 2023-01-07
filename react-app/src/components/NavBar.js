@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import Search from './Search';
 import styles from './cssModules/Navbar.module.css'
-import logo from '../assets/RH-logo.png'
+import logo from '../assets/final-peaktrade-logo.png'
 
 const NavBar = () => {
   return (
