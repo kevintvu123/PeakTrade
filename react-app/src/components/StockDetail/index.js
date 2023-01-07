@@ -83,6 +83,7 @@ export default function StockDetail() {
         return num
     }
 
+
     return (
         <>
             <div className={styles.bodyContainer}>

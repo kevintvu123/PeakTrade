@@ -12,8 +12,6 @@ export default function OwnedStocks() {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const [graphLoading, setGraphLoading] = useState(false)
-
     const portfolio = useSelector((state) => state.portfolio)
 
     useEffect(() => {
@@ -45,9 +43,7 @@ export default function OwnedStocks() {
                             <div>{stock.amount} Shares</div>
                         </div>
                         <div className={styles.miniStockChartContainer}>
-                            {!graphLoading &&
-                                <MiniStockChart stockTicker={stock.ticker} setGraphLoading={setGraphLoading} />
-                            }
+                            <MiniStockChart stockTicker={stock.ticker} />
                         </div>
                         <div className={styles.stockPriceContainer}>
                             <OwnedStockPrice stockTicker={stock.ticker} />

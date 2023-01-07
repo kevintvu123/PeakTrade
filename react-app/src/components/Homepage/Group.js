@@ -133,7 +133,7 @@ export default function Group() {
                                             {
                                                 group["members"].map((member) => {
                                                     return (
-                                                        <div className={styles.eachMemberContainer}>
+                                                        <div className={styles.eachMemberContainer} key={member.id}>
                                                             <div>
                                                                 {`${member.firstName} ${member.lastName}`}
                                                             </div>

@@ -36,7 +36,7 @@ const SignUpForm = () => {
       errors.push('Enter a valid email')
     }
 
-    if (password.length <= 10) {
+    if (password.length < 10) {
       errors.push('Password must be at least 10 characters')
     }
 
