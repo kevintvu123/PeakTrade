@@ -38,8 +38,7 @@ export default function Homepage() {
                             
                         </div>
                         <div className={styles.portfolioChartContainer}>
-                            {/* <PortfolioChart /> */}
-                            Portfolio Chart (Currently Unavailable)
+                            <PortfolioChart />
                         </div>
                         <div className={styles.buyingPowerContainer}>
                             <div>Buying Power</div>
