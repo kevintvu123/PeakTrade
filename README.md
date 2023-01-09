@@ -70,3 +70,35 @@ SECRET_KEY=lkasjdf09ajsdkfljalsiorj12n3490re9485309irefvn,u90818734902139489230
 DATABASE_URL=sqlite:///dev.db
 SCHEMA=flask_schema
 ```
+
+## Landing Page
+Users can access the "Log In" and "Sign Up" buttons on the top right of the landing page.
+
+<img width="1920" alt="landing" src="https://cdn.discordapp.com/attachments/1039657765427224709/1061824626294009866/image.png">
+
+## Log In and Sign Up
+Users can redirect back and forth from the log in and sign up pages. Users successfully logged in will be directed to their portfolio page where they can view their portfolio value, portfolio chart, owned stocks list, and groups. 
+
+<img width="1920" alt="login" src="https://cdn.discordapp.com/attachments/1039657765427224709/1061824683680477184/image.png">
+
+<img width="1920" alt="signup" src="https://cdn.discordapp.com/attachments/1039657765427224709/1061824732242124901/image.png">
+
+<img width="1920" alt="portfolio" src="https://cdn.discordapp.com/attachments/1039657765427224709/1061824864366895204/image.png">
+
+## Feature 1: Portfolio
+Logged in users are able to access stock detail page by using the search bar and inputting either the stock ticker or stock name. On the detail page, users can buy and sell stocks. 
+
+<img width="1920" alt="buy" src="https://cdn.discordapp.com/attachments/1039657765427224709/1061825031631544481/image.png">
+
+<img width="1920" alt="sell" src="https://cdn.discordapp.com/attachments/1039657765427224709/1061825129493041284/image.png">
+
+## Feature 2: Groups
+Logged in users can create groups. Upon creation, group owners will be provided with an id. To invite friends, you would share the name of group and id. Users in groups can click "Show More" to display the other members and their buying power. Owners of a group can also rename and delete the group. Members of a group can choose to leave.
+
+<img width="1920" alt="group creation" src="https://cdn.discordapp.com/attachments/1039657765427224709/1061825230097621062/image.png">
+
+<img width="1920" alt="group deletion" src="https://cdn.discordapp.com/attachments/1039657765427224709/1061825311974633502/image.png">
+
+## Future Implementations
+* Stock Watchlist
+* Stock News
