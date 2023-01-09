@@ -1,6 +1,7 @@
 .bigContainer {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    background-color: #012616;
     /* border: 1px solid red; */
 }
 
@@ -8,7 +9,7 @@
     display: flex;
     justify-content: space-between;
     height: 64px;
-    background-color: #002C15;
+    background-color: #012616;
     border-bottom: 1px solid #C3F53C;
 }
 
@@ -17,7 +18,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    width: 185px;
+    width: 180px;
     border-right: 1px solid #C3F53C;
 }
 
@@ -33,6 +34,33 @@
     /* border: 1px solid red; */
 }
 
+.rightNavContainer {
+    display: flex;
+}
+
+.linkContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    width: 500px;
+    font-size: 20px;
+    color: white;
+    /* border: 1px solid white; */
+}
+
+.anchorTag {
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+
+.anchorTag:visited {
+    color: inherit;
+}
+
+.anchorTag:hover {
+    color: #C3F53C;
+}
 
 .leftNavContainer {
     display: flex;
@@ -55,9 +83,10 @@
 }
 
 .loginButton {
+    width: 100%;
     font-weight: 600;
     margin-right: 10px;
-    background-color: #002C15;
+    background-color: #012616;
     color: #C3F53C;
 }
 
@@ -67,7 +96,27 @@
 }
 
 .firstContainer {
-    height: 93%;
-    background-color: #002C15;
+    background-color: #012616;
+    display: flex;
+    justify-content: center;
     /* border: 1px solid red; */
+}
+
+.landingVideo {
+    margin: 20px 0;
+    width: 100%;
+    /* border: 1px solid white; */
+}
+
+.videoFooterContainer {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    color: #C3F53C;
+    font-size: 65px;
+    font-weight: 600;
+    background-color: #012616;
 }

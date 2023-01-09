@@ -8,6 +8,7 @@ export default function PortfolioChart() {
     const dispatch = useDispatch()
 
     const [allStockChartData, setAllStockChartData] = useState([])
+    const [loaded, setLoaded] = useState(false)
 
     const portfolio = useSelector((state) => state.portfolio)
     const stocksArr = portfolio.stocksArr
@@ -58,11 +59,12 @@ export default function PortfolioChart() {
                         }
                     })
                     .then(() => { setAllStockChartData(dataPoints) })
+                    .then(() => setLoaded(true))
                     .catch(err => console.error('error:' + err))
             }
         }
         fetchData()
-    }, [stocksArr])
+    }, [stocksArr, apiKey])
 
     if (Object.keys(portfolio).length === 0) return null
 
@@ -87,14 +89,16 @@ export default function PortfolioChart() {
 
     return (
         <>
-            <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={currentAllStockData} transitionDuration={0}>
-                    <XAxis dataKey="date" hide />
-                    <YAxis domain hide />
-                    <Tooltip content={<CustomTooltip />} wrapperStyle={{ border: '0' }} />
-                    <Line type="monotone" dataKey="value" stroke="#00C805" strokeWidth={1.5} dot={false} />
-                </LineChart>
-            </ResponsiveContainer>
+            {loaded &&
+                <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={currentAllStockData} transitionDuration={0}>
+                        <XAxis dataKey="date" hide />
+                        <YAxis domain hide />
+                        <Tooltip content={<CustomTooltip />} wrapperStyle={{ border: '0' }} />
+                        <Line type="monotone" dataKey="value" stroke="#00C805" strokeWidth={1.5} dot={false} />
+                    </LineChart>
+                </ResponsiveContainer>
+            }
         </>
     )
 }

@@ -29,6 +29,7 @@ export default function OwnedStockPrice({ stockTicker }) {
             .then(result => {
                 setStockPrice(result['Global Quote']['05. price'])
             })
+            .catch(err => console.error(err))
     }, [url])
 
     return (

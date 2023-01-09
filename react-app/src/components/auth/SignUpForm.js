@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import styles from '../cssModules/SignUpForm.module.css'
+import signupImg from '../../assets/RH-signup.png'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -87,7 +88,17 @@ const SignUpForm = () => {
   return (
     <div className={styles.bodyContainer}>
       <div className={styles.leftSignUp}>
-
+        <div className={styles.leftHeaderContainer}>
+          <div>
+            Invest with zero
+          </div>
+          <div>
+            commission fees
+          </div>
+        </div>
+        <div className={styles.leftImgContainer}>
+          <img src={signupImg} alt='signup'/>
+        </div>
       </div>
       <div className={styles.rightSignUp}>
         <div className={styles.signupFormContainer}>
