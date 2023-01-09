@@ -22,6 +22,54 @@
     width: 50%;
 }
 
+.accountNavLinks {
+    font-size: 13px;
+    font-weight: 600;
+}
+
 .accountNavLinks:hover {
     cursor: pointer;
+    color: #00C805;
+}
+
+.dropDownMenu {
+    width: 250px;
+    height: 100px;
+    position: absolute;
+    right: 40px;
+    top: 50px;
+    border-radius: 4px;
+    border: 1px solid #30363A;
+    background-color: #1E2124;
+    display: flex;
+    flex-direction: column;
+}
+
+.nameContainer {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid white;
+    height: 50px;
+    padding: 0 25px;
+    font-size: 16px;
+    font-weight: 600;
+    overflow: hidden;
+}
+
+.logoutContainer {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 0 25px;
+    font-size: 14px;
+}
+
+.logoutContainer:hover {
+    cursor: pointer;
+    background-color: #30363A;
+}
+
+.logoutContainer>img {
+    height: 28px;
+    margin-right: 10px;
 }
