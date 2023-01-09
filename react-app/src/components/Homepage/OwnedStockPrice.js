@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 export default function OwnedStockPrice({ stockTicker }) {
 
     const [stockPrice, setStockPrice] = useState()
+    const [loaded, setLoaded] = useState(false)
 
     // const YHapiKey = process.env.REACT_APP_YH_API_KEY
     // const yhUrl = `https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=${stockTicker}`
@@ -29,12 +30,18 @@ export default function OwnedStockPrice({ stockTicker }) {
             .then(result => {
                 setStockPrice(result['Global Quote']['05. price'])
             })
+            .then(() => setLoaded(true))
             .catch(err => console.error(err))
     }, [url])
 
     return (
-        <div>
-            ${parseFloat(stockPrice).toFixed(2)}
-        </div>
+
+        <>
+            {loaded &&
+                <div>
+                    ${parseFloat(stockPrice).toFixed(2)}
+                </div>
+            }
+        </>
     )
 }
