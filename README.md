@@ -1,6 +1,6 @@
 # PeakTrade
 
-<a href='https://peaktrade.onrender.com/' alt=''>PeakTrade</a> is a clone of the popular investing application, Robinhood, that allows users to purchase and sell shares of stocks. PeakTrade also implements a group functionality that allows for friendly competition among all users and groups of friends.
+<a href='https://peaktrade.onrender.com/' alt=''>PeakTrade</a> is a clone of the popular investing application, Robinhood, that allows users to purchase and sell shares of stocks. PeakTrade was designed out of a desire to create a platform that combines the fun of stock market simulation with the social aspect of friendly competition among users with group functionality. 
 
 ## ✅ Wiki Link
 
