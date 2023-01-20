@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateGroupThunk } from "../../store/group";
 import styles from "../cssModules/CreateGroupForm.module.css"
 
 function EditGroupForm({ setHasSubmitted, setShowEditModal, groupId }) {
     const dispatch = useDispatch();
 
-    const [groupName, setGroupName] = useState("");
+    const group = useSelector((state) => state.group)
+    let prevName = (group.groups[groupId].name)
+
+    const [groupName, setGroupName] = useState(prevName);
     const [errors, setErrors] = useState([]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,6 +34,7 @@ function EditGroupForm({ setHasSubmitted, setShowEditModal, groupId }) {
             return editGroup;
         }
     };
+
 
     return (
         <div className={styles.createGroupFormContainer}>
