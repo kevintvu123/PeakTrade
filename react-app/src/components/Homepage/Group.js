@@ -128,7 +128,7 @@ export default function Group() {
                                         <div className={styles.headerMemberContainer}>
                                             <div className={styles.groupDetailHeader}>
                                                 <div>Member Name:</div>
-                                                <div>Buying Power:</div>
+                                                <div>Portfolio Value:</div>
                                             </div>
                                             {
                                                 group["members"].map((member) => {

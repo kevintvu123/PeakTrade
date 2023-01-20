@@ -11,7 +11,7 @@ import styles from '../cssModules/Homepage.module.css'
 
 export default function Homepage() {
     const dispatch = useDispatch()
-
+    
     const portfolio = useSelector((state) => state.portfolio)
 
     useEffect(() => {

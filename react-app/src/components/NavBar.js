@@ -12,8 +12,6 @@ const NavBar = () => {
 
   const user = useSelector(state => state.session.user);
 
-  console.log(user)
-
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
