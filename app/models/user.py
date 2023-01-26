@@ -48,4 +48,5 @@ class User(db.Model, UserMixin):
                 transaction.to_dict() for transaction in self.transactions
             ],
             "groups": [group.to_dict_base() for group in self.groups],
+            "watchlists": [watchlist.to_dict() for watchlist in self.watchlists],
         }

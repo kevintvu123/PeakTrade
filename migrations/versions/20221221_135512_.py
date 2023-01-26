@@ -131,7 +131,6 @@ def upgrade():
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("watchlist_id", sa.Integer(), nullable=False),
         sa.Column("ticker", sa.String(), nullable=False),
-        sa.Column("market_value", sa.Float(), nullable=False),
         sa.ForeignKeyConstraint(
             ["watchlist_id"],
             ["watchlists.id"],

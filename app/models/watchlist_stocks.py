@@ -12,7 +12,6 @@ class Watchlist_Stock(db.Model):
         db.Integer, db.ForeignKey(add_prefix_for_prod("watchlists.id")), nullable=False
     )
     ticker = db.Column(db.String, nullable=False)
-    market_value = db.Column(db.Float, nullable=False)
 
     watchlist = db.relationship("Watchlist", back_populates="watchlist_stocks")
 
