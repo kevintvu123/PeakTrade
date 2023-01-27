@@ -28,3 +28,32 @@ def create_watchlist():
         return create_watchlist.to_dict()
 
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+
+
+@watchlist_routes.route("/<int:watchlist_id>", methods=["PUT"])
+@login_required
+def update_watchlist(watchlist_id):
+    """
+    Update a Watchlist name only if user owns watchlist
+    """
+    data = request.get_json()
+    data["csrf_token"] = request.cookies["csrf_token"]
+    user_id = current_user.id
+
+    form = WatchlistForm(**data)
+    watchlist = Watchlist.query.get(watchlist_id)
+    # print(watchlist)
+
+    if not watchlist:
+        return {"errors": "This watchlist does not exist"}, 401
+
+    watchlist_info = watchlist.to_dict()
+    if watchlist_info["ownerId"] is not user_id:
+        return {"errors": "You do not own this watchlist"}, 401
+
+    if watchlist and form.validate_on_submit():
+        watchlist.name = data["name"]
+        db.session.commit()
+        return watchlist.to_dict()
+
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 401

@@ -22,6 +22,7 @@ class Watchlist(db.Model):
         return {
             "id": self.id,
             "name": self.name,
+            "ownerId": self.user_id,
             "watchlistStocks": [
                 watchlist_stock.to_dict() for watchlist_stock in self.watchlist_stocks
             ],

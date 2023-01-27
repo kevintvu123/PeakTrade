@@ -107,6 +107,9 @@ def update_group(group_id):
     group = Group.query.get(group_id)
     # print(group.name)
 
+    if not group:
+        return {"errors": "This group does not exist"}, 401
+
     group_info = group.to_dict()
 
     if group_info["ownerId"] is not user_id:
