@@ -57,3 +57,26 @@ def update_watchlist(watchlist_id):
         return watchlist.to_dict()
 
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+
+
+@watchlist_routes.route("/<int:watchlist_id>", methods=["DELETE"])
+@login_required
+def delete_watchlist(watchlist_id):
+    """
+    Delete a Watchlist only if user owns watchlist
+    """
+
+    watchlist = Watchlist.query.get(watchlist_id)
+    user_id = current_user.id
+
+    if not watchlist:
+        return {"message": "Watchlist couldn't be found"}, 404
+
+    watchlist_info = watchlist.to_dict()
+
+    if watchlist_info["ownerId"] is not user_id:
+        return {"errors": "You do not own this watchlist"}, 401
+
+    db.session.delete(watchlist)
+    db.session.commit()
+    return {"message": "Successfully deleted"}
