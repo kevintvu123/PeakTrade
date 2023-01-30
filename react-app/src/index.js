@@ -10,6 +10,7 @@ import { EditGroupModalProvider } from './context/EditGroupModal';
 
 import * as portfolioActions from "./store/portfolio"
 import * as groupActions from "./store/group"
+import * as watchlistActions from "./store/watchlist"
 
 const store = configureStore();
 
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV !== "production") {
   window.store = store; //expose store to window in development
   window.portfolioActions = portfolioActions;
   window.groupActions = groupActions;
+  window.watchlistActions = watchlistActions;
 }
 
 ReactDOM.render(

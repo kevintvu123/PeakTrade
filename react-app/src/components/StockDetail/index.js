@@ -40,6 +40,7 @@ export default function StockDetail() {
         fetch(url3) //Fetches stockName from stockTicker
             .then(res => res.json())
             .then(result => setStockName(result['bestMatches'][0]['2. name']))
+            .catch(err => console.error('error:' + err))
         fetch(url) //Fetches current market value of stock
             .then(res => res.json())
             .then((result) => {
@@ -47,6 +48,7 @@ export default function StockDetail() {
                 setStockChange(parseFloat(result['Global Quote']['09. change']).toFixed(2))
                 setStockChangePercent(parseFloat(result['Global Quote']['10. change percent']).toFixed(2))
             })
+            .catch(err => console.error('error:' + err))
         fetch(url2) //Fetches Full name with stock ticker
             .then(res => res.json())
             .then((result) => {
@@ -58,6 +60,7 @@ export default function StockDetail() {
                     setStock52Low(result['52WeekLow'])
                 }
             })
+            .catch(err => console.error('error:' + err))
     }, [url, url2, url3])
 
     const portfolioBool = Object.keys(portfolio).length
