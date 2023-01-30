@@ -1,10 +1,26 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Watchlist, Watchlist_Stock
+from app.models import db, User, Watchlist, Watchlist_Stock
 from app.forms import WatchlistForm
 from .auth_routes import validation_errors_to_error_messages
 
 watchlist_routes = Blueprint("watchlists", __name__)
+
+@watchlist_routes.route("/current")
+@login_required
+def get_current_watchlists():
+    """
+    Query for all watchlists that user owns
+    """
+
+    user_id = current_user.id
+    user = User.query.get(user_id)
+
+    watchlistArr = [watchlist.to_dict() for watchlist in user.watchlists]
+
+    response = {"watchlists": watchlistArr}
+
+    return response
 
 
 @watchlist_routes.route("", methods=["POST"])
