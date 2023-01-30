@@ -98,6 +98,24 @@ def update_watchlist(watchlist_id):
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 
+@watchlist_routes.route("/watchlist-stocks/<int:watchlist_stock_id>", methods=["DELETE"])
+@login_required
+def delete_watchlist_stock(watchlist_stock_id):
+    """
+    Delete a stock from watchlist
+    """
+
+    watchlist_stock = Watchlist_Stock.query.get(watchlist_stock_id)
+
+    if not watchlist_stock:
+        return {"message": "Watchlist Stock couldn't be found"}, 404
+
+    db.session.delete(watchlist_stock)
+    db.session.commit()
+
+    return {"message": "Successfully deleted"}
+
+
 @watchlist_routes.route("/<int:watchlist_id>", methods=["DELETE"])
 @login_required
 def delete_watchlist(watchlist_id):
