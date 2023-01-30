@@ -16,7 +16,6 @@ export const getUserWatchlistThunk = () => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(getUserWatchlist(data))
-        console.log(data)
         return data;
     } else {
         throw response
@@ -41,6 +40,24 @@ export const postWatchlistThunk = (body) => async (dispatch) => {
     }
 }
 
+export const postWatchlistStockThunk = (body, watchlistId) => async (dispatch) => {
+    const response = await fetch(`/api/watchlists/${watchlistId}/stocks`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body),
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        await dispatch(getUserWatchlistThunk());
+        return data
+    } else {
+        throw response
+    }
+}
+
 export const updateWatchlistThunk = (body, watchlistId) => async (dispatch) => {
     const response = await fetch(`/api/watchlists/${watchlistId}`, {
         method: "PUT",
@@ -61,6 +78,20 @@ export const updateWatchlistThunk = (body, watchlistId) => async (dispatch) => {
 
 export const deleteWatchlistThunk = (watchlistId) => async (dispatch) => {
     const response = await fetch(`/api/watchlists/${watchlistId}`, {
+        method: "DELETE",
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        await dispatch(getUserWatchlistThunk());
+        return data
+    } else {
+        throw response;
+    }
+}
+
+export const deleteWatchlistStockThunk = (watchlistStockId) => async (dispatch) => {
+    const response = await fetch(`/api/watchlists/watchlist-stocks/${watchlistStockId}`, {
         method: "DELETE",
     })
 
