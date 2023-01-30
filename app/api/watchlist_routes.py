@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, User, Watchlist, Watchlist_Stock
-from app.forms import WatchlistForm
+from app.forms import WatchlistForm, WatchlistStockForm
 from .auth_routes import validation_errors_to_error_messages
 
 watchlist_routes = Blueprint("watchlists", __name__)
@@ -21,6 +21,29 @@ def get_current_watchlists():
     response = {"watchlists": watchlistArr}
 
     return response
+
+
+@watchlist_routes.route("/<int:watchlist_id>/stocks", methods=["POST"])
+@login_required
+def post_watchlist_stock(watchlist_id):
+    """
+    Adds stock to watchlist
+    """
+    data = request.get_json()
+    data["csrf_token"] = request.cookies["csrf_token"]
+
+    form = WatchlistStockForm(**data)
+
+    if form.validate_on_submit():
+        # print(data)
+        # print((watchlist_id))
+
+        create_watchlist_stock = Watchlist_Stock(watchlist_id=watchlist_id, ticker=data["ticker"])
+        db.session.add(create_watchlist_stock)
+        db.session.commit()
+
+        return create_watchlist_stock.to_dict()
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 
 @watchlist_routes.route("", methods=["POST"])
