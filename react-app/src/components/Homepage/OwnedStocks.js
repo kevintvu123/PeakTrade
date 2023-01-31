@@ -5,9 +5,11 @@ import { getUserPortfolioThunk } from "../../store/portfolio"
 
 import OwnedStockPrice from "./OwnedStockPrice"
 import MiniStockChart from "./MiniStockChart"
+import CreateWatchlistForm from "../Forms/CreateWatchlistForm"
 
 import styles from '../cssModules/OwnedStocks.module.css'
 import plusIcon from '../../assets/plus-watchlist-icon.png'
+import { getUserWatchlistThunk } from "../../store/watchlist"
 
 export default function OwnedStocks() {
     const dispatch = useDispatch()
@@ -16,18 +18,22 @@ export default function OwnedStocks() {
     const [showCreateWatchlist, setShowCreateWatchlist] = useState(false)
 
     const portfolio = useSelector((state) => state.portfolio)
+    const watchlist = useSelector((state) => state.watchlist)
 
     useEffect(() => {
         dispatch(getUserPortfolioThunk())
+        dispatch(getUserWatchlistThunk())
     }, [dispatch])
 
-    if (Object.keys(portfolio).length === 0) return null
+    if (Object.keys(portfolio).length === 0 || Object.keys(watchlist).length === 0) return null
 
     const stocksArr = portfolio.stocksArr
+    const watchlistArr = watchlist.watchlistsArr
 
     const redirectStock = (stockTicker) => {
         history.push(`/stocks/${stockTicker}`)
     }
+
 
     return (
         <div className={styles.stockListContainer}>
@@ -58,13 +64,22 @@ export default function OwnedStocks() {
                 <div>
                     Lists
                 </div>
-                <div className={styles.plusIconContainer}>
+                <div className={styles.plusIconContainer} onClick={() => setShowCreateWatchlist((prevValue) => !prevValue)}>
                     <img src={plusIcon} alt='plus icon' />
                 </div>
             </div>
             {showCreateWatchlist && (
-                <div>Mapped watchlist</div>
+                <div className={styles.createWatchlistFormDiv}>
+                    <CreateWatchlistForm setShowCreateWatchlist={setShowCreateWatchlist} />
+                </div>
             )}
+            {watchlistArr.map((watchlist) => {
+                return (
+                    <div className={styles.watchlistDiv}>
+                        <div>{watchlist.name}</div>
+                    </div>
+                )
+            })}
         </div>
     )
 }
