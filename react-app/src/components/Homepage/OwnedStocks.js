@@ -1,16 +1,19 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
 import { getUserPortfolioThunk } from "../../store/portfolio"
 
 import OwnedStockPrice from "./OwnedStockPrice"
 import MiniStockChart from "./MiniStockChart"
 
 import styles from '../cssModules/OwnedStocks.module.css'
-import { useHistory } from "react-router-dom"
+import plusIcon from '../../assets/plus-watchlist-icon.png'
 
 export default function OwnedStocks() {
     const dispatch = useDispatch()
     const history = useHistory()
+
+    const [showCreateWatchlist, setShowCreateWatchlist] = useState(false)
 
     const portfolio = useSelector((state) => state.portfolio)
 
@@ -51,7 +54,17 @@ export default function OwnedStocks() {
                     </div>
                 )
             })}
-
+            <div className={styles.watchlistHeader}>
+                <div>
+                    Lists
+                </div>
+                <div className={styles.plusIconContainer}>
+                    <img src={plusIcon} alt='plus icon' />
+                </div>
+            </div>
+            {showCreateWatchlist && (
+                <div>Mapped watchlist</div>
+            )}
         </div>
     )
 }

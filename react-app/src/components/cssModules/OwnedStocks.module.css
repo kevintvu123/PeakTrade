@@ -48,3 +48,28 @@
     width: 50px;
     /* border: 1px solid purple; */
 }
+
+.watchlistHeader {
+    height: 51px;
+    border-bottom: 1px solid #40494E;
+    border-top: 1px solid #40494E;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.plusIconContainer {
+    display: flex;
+    align-items: center;
+}
+
+.plusIconContainer:hover {
+    cursor: pointer;
+}
+
+.plusIconContainer>img {
+    height: 25px;
+}
