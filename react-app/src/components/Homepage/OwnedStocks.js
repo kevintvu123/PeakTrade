@@ -9,13 +9,16 @@ import CreateWatchlistForm from "../Forms/CreateWatchlistForm"
 
 import styles from '../cssModules/OwnedStocks.module.css'
 import plusIcon from '../../assets/plus-watchlist-icon.png'
-import { getUserWatchlistThunk } from "../../store/watchlist"
+import moreIcon from '../../assets/more-icon.png'
+import { deleteWatchlistThunk, getUserWatchlistThunk } from "../../store/watchlist"
 
 export default function OwnedStocks() {
     const dispatch = useDispatch()
     const history = useHistory()
 
     const [showCreateWatchlist, setShowCreateWatchlist] = useState(false)
+    const [showMenu, setShowMenu] = useState(false)
+    const [watchlistId, setWatchlistId] = useState()
 
     const portfolio = useSelector((state) => state.portfolio)
     const watchlist = useSelector((state) => state.watchlist)
@@ -25,6 +28,18 @@ export default function OwnedStocks() {
         dispatch(getUserWatchlistThunk())
     }, [dispatch])
 
+    useEffect(() => {
+        if (!showMenu) return;
+
+        const closeMenu = () => {
+            setShowMenu(false);
+        };
+
+        document.addEventListener("click", closeMenu);
+
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
+
     if (Object.keys(portfolio).length === 0 || Object.keys(watchlist).length === 0) return null
 
     const stocksArr = portfolio.stocksArr
@@ -32,6 +47,11 @@ export default function OwnedStocks() {
 
     const redirectStock = (stockTicker) => {
         history.push(`/stocks/${stockTicker}`)
+    }
+
+    const handleDeleteWatchlist = async (watchlistId) => {
+        const deleteWatchlist = await dispatch(deleteWatchlistThunk(watchlistId))
+        return deleteWatchlist
     }
 
 
@@ -75,9 +95,27 @@ export default function OwnedStocks() {
             )}
             {watchlistArr.map((watchlist) => {
                 return (
-                    <div className={styles.watchlistDiv}>
-                        <div>{watchlist.name}</div>
-                    </div>
+                    <>
+                        <div className={styles.watchlistDiv}>
+                            <div>{watchlist.name}</div>
+                            <div className={styles.plusIconContainer} onClick={() => {
+                                setShowMenu(true)
+                                setWatchlistId(watchlist.id)
+                            }}>
+                                <img src={moreIcon} alt='more icon' />
+                            </div>
+                        </div>
+                        {showMenu && (watchlistId === watchlist.id) && (
+                            <div className={styles.dropdownMenu}>
+                                <div className={styles.editListDiv}>
+                                    Edit list
+                                </div>
+                                <div className={styles.editListDiv} onClick={() => handleDeleteWatchlist(watchlistId)}>
+                                    Delete list
+                                </div>
+                            </div>
+                        )}
+                    </>
                 )
             })}
         </div>
