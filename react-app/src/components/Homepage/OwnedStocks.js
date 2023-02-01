@@ -5,12 +5,16 @@ import { getUserPortfolioThunk } from "../../store/portfolio"
 
 import OwnedStockPrice from "./OwnedStockPrice"
 import MiniStockChart from "./MiniStockChart"
+
+import { EditWatchlistModal } from "../../context/EditWatchlistModa"
+
 import CreateWatchlistForm from "../Forms/CreateWatchlistForm"
 
 import styles from '../cssModules/OwnedStocks.module.css'
 import plusIcon from '../../assets/plus-watchlist-icon.png'
 import moreIcon from '../../assets/more-icon.png'
 import { deleteWatchlistThunk, getUserWatchlistThunk } from "../../store/watchlist"
+import EditWatchlistForm from "../Forms/EditWatchlistForm"
 
 export default function OwnedStocks() {
     const dispatch = useDispatch()
@@ -19,6 +23,7 @@ export default function OwnedStocks() {
     const [showCreateWatchlist, setShowCreateWatchlist] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
     const [watchlistId, setWatchlistId] = useState()
+    const [showEditModal, setShowEditModal] = useState(false)
 
     const portfolio = useSelector((state) => state.portfolio)
     const watchlist = useSelector((state) => state.watchlist)
@@ -107,7 +112,7 @@ export default function OwnedStocks() {
                         </div>
                         {showMenu && (watchlistId === watchlist.id) && (
                             <div className={styles.dropdownMenu}>
-                                <div className={styles.editListDiv}>
+                                <div className={styles.editListDiv} onClick={() => setShowEditModal(true)}>
                                     Edit list
                                 </div>
                                 <div className={styles.editListDiv} onClick={() => handleDeleteWatchlist(watchlistId)}>
@@ -115,9 +120,17 @@ export default function OwnedStocks() {
                                 </div>
                             </div>
                         )}
+                        {showEditModal && (
+                            <EditWatchlistModal onClose={() => {
+                                setShowEditModal(false)
+                            }}>
+                                <EditWatchlistForm watchlistId={watchlistId} setShowEditModal={setShowEditModal} />
+                            </EditWatchlistModal>
+                        )
+                        }
                     </>
                 )
             })}
-        </div>
+        </div >
     )
 }

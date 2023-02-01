@@ -1,0 +1,58 @@
+.editWatchlistFormContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
+    height: 100%;
+    /* border: 1px solid blue; */
+}
+
+.editWatchlistHeader {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.editWatchlistInput {
+    margin-bottom: 14px;
+    width: 95%;
+    height: 32px;
+    padding: 0 5px;
+    border-radius: 4px;
+    border: 1px solid white;
+    color: white;
+    background-color: #1e2124;
+}
+
+.editWatchlistInput:focus {
+    border-color: #00C805;
+    outline: none;
+}
+
+.editWatchlistButton {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 0 20px;
+    height: 45px;
+    color: black;
+    background-color: #00C805;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+}
+
+.editWatchlistButton:hover {
+    cursor: pointer;
+    background-color: #1bdb22;
+}
+
+.errorMap {
+    font-size: 15px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: red;
+    /* border: 1px solid red; */
+}
