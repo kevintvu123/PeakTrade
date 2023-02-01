@@ -33,6 +33,7 @@
     font-weight: 600;
     padding: 0 20px;
     height: 45px;
+    width: 100%;
     color: black;
     background-color: #00C805;
     display: flex;
