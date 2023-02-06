@@ -6,7 +6,7 @@ import { getUserPortfolioThunk } from "../../store/portfolio"
 import OwnedStockPrice from "./OwnedStockPrice"
 import MiniStockChart from "./MiniStockChart"
 
-import { EditWatchlistModal } from "../../context/EditWatchlistModa"
+import { EditWatchlistModal } from "../../context/EditWatchlistModal"
 
 import CreateWatchlistForm from "../Forms/CreateWatchlistForm"
 

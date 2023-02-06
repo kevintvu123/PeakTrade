@@ -7,7 +7,7 @@ import configureStore from './store';
 
 import { GroupModalProvider } from './context/GroupModal';
 import { EditGroupModalProvider } from './context/EditGroupModal';
-import { EditWatchlistModalProvider } from './context/EditWatchlistModa';
+import { EditWatchlistModalProvider } from './context/EditWatchlistModal';
 
 import * as portfolioActions from "./store/portfolio"
 import * as groupActions from "./store/group"
