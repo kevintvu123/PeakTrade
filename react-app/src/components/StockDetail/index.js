@@ -185,6 +185,11 @@ export default function StockDetail() {
                                 </div>
                             </div>
                         }
+                        <div className={styles.addWatchlistStockContainer}>
+                            <div className={styles.addWatchlistStockButton}>
+                                Add to lists
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
