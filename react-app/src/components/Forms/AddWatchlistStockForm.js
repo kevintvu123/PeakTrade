@@ -25,14 +25,18 @@ function AddWatchlistStockForm({ setShowWatchlistStockModal, stockTicker }) {
 
         const errors = [];
 
-        const watchlistStocks = (watchlist.watchlists[selectedWatchlist].watchlistStocks)
-        // console.log(watchlistStocks)
+        if (!selectedWatchlist) {
+            errors.push("You need to select a list")
+        }
 
-        watchlistStocks.forEach((stock) => {
-            if (stock.ticker === stockTicker) {
-                errors.push("You already have this stock in chosen list")
-            }
-        })
+        if (selectedWatchlist) {
+            const watchlistStocks = (watchlist.watchlists[selectedWatchlist].watchlistStocks)
+            watchlistStocks.forEach((stock) => {
+                if (stock.ticker === stockTicker) {
+                    errors.push("You already have this stock in chosen list")
+                }
+            })
+        }
 
         setErrors(errors);
 
@@ -58,7 +62,10 @@ function AddWatchlistStockForm({ setShowWatchlistStockModal, stockTicker }) {
                                 type="radio"
                                 value={watchlist.id}
                                 checked={selectedWatchlist === watchlist.id}
-                                onChange={(e) => setSelectedWatchlist(watchlist.id)}
+                                onChange={(e) => {
+                                    setErrors([])
+                                    setSelectedWatchlist(watchlist.id)
+                                }}
                             />
                             <label key={watchlist.id}>
                                 {watchlist.name}
