@@ -8,6 +8,7 @@ import configureStore from './store';
 import { GroupModalProvider } from './context/GroupModal';
 import { EditGroupModalProvider } from './context/EditGroupModal';
 import { EditWatchlistModalProvider } from './context/EditWatchlistModal';
+import { AddWatchlistStockModalProvider } from './context/AddWatchlistStockModal';
 
 import * as portfolioActions from "./store/portfolio"
 import * as groupActions from "./store/group"
@@ -28,7 +29,9 @@ ReactDOM.render(
       <GroupModalProvider>
         <EditGroupModalProvider>
           <EditWatchlistModalProvider>
-            <App />
+            <AddWatchlistStockModalProvider>
+              <App />
+            </AddWatchlistStockModalProvider>
           </EditWatchlistModalProvider>
         </EditGroupModalProvider>
       </GroupModalProvider>

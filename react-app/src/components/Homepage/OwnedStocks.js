@@ -103,11 +103,13 @@ export default function OwnedStocks() {
                     <>
                         <div className={styles.watchlistDiv}>
                             <div>{watchlist.name}</div>
-                            <div className={styles.plusIconContainer} onClick={() => {
-                                setShowMenu(true)
-                                setWatchlistId(watchlist.id)
-                            }}>
-                                <img src={moreIcon} alt='more icon' />
+                            <div>
+                                <div className={styles.plusIconContainer} onClick={() => {
+                                    setShowMenu(true)
+                                    setWatchlistId(watchlist.id)
+                                }}>
+                                    <img src={moreIcon} alt='more icon' />
+                                </div>
                             </div>
                         </div>
                         {showMenu && (watchlistId === watchlist.id) && (
@@ -128,6 +130,17 @@ export default function OwnedStocks() {
                             </EditWatchlistModal>
                         )
                         }
+                        {watchlist.watchlistStocks.map((watchlistStock) => {
+                            return (
+                                <div className={styles.watchlistStockDiv} onClick={() => { redirectStock(watchlistStock.ticker) }}>
+                                    {watchlistStock.ticker}
+                                    <div className={styles.miniStockChartContainer}>
+                                        <MiniStockChart stockTicker={watchlistStock.ticker} />
+                                    </div>
+                                    <OwnedStockPrice stockTicker={watchlistStock.ticker} />
+                                </div>
+                            )
+                        })}
                     </>
                 )
             })}
