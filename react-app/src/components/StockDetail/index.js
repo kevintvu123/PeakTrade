@@ -2,9 +2,14 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getUserPortfolioThunk } from "../../store/portfolio"
+
 import StockChart from "./StockChart"
+import { AddWatchlistStockModal } from "../../context/AddWatchlistStockModal"
+
 import BuyStockForm from "../Forms/BuyStockForm"
 import SellStockForm from "../Forms/SellStockForm"
+import AddWatchlistStockForm from "../Forms/AddWatchlistStockForm"
+
 import styles from '../cssModules/StockDetail.module.css'
 
 export default function StockDetail() {
@@ -24,6 +29,8 @@ export default function StockDetail() {
     const [stock52Low, setStock52Low] = useState("-")
     const [transaction, setTransaction] = useState("buy")
     const [transactionLoading, setTransactionLoading] = useState(false)
+
+    const [showWatchlistStockModal, setShowWatchlistStockModal] = useState(false)
 
     const portfolio = useSelector((state) => state.portfolio)
 
@@ -185,6 +192,18 @@ export default function StockDetail() {
                                 </div>
                             </div>
                         }
+                        <div className={styles.addWatchlistStockContainer}>
+                            <div className={styles.addWatchlistStockButton} onClick={() => setShowWatchlistStockModal(true)}>
+                                Add to lists
+                            </div>
+                            {showWatchlistStockModal && (
+                                <AddWatchlistStockModal onClose={() => {
+                                    setShowWatchlistStockModal(false)
+                                }}>
+                                    <AddWatchlistStockForm setShowWatchlistStockModal={setShowWatchlistStockModal} stockTicker={stockTicker} />
+                                </AddWatchlistStockModal>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

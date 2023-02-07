@@ -6,13 +6,14 @@ import { getUserPortfolioThunk } from "../../store/portfolio"
 import OwnedStockPrice from "./OwnedStockPrice"
 import MiniStockChart from "./MiniStockChart"
 
-import { EditWatchlistModal } from "../../context/EditWatchlistModa"
+import { EditWatchlistModal } from "../../context/EditWatchlistModal"
 
 import CreateWatchlistForm from "../Forms/CreateWatchlistForm"
 
 import styles from '../cssModules/OwnedStocks.module.css'
 import plusIcon from '../../assets/plus-watchlist-icon.png'
 import moreIcon from '../../assets/more-icon.png'
+import expandIcon from '../../assets/invert-icon.png'
 import { deleteWatchlistThunk, getUserWatchlistThunk } from "../../store/watchlist"
 import EditWatchlistForm from "../Forms/EditWatchlistForm"
 
@@ -24,6 +25,7 @@ export default function OwnedStocks() {
     const [showMenu, setShowMenu] = useState(false)
     const [watchlistId, setWatchlistId] = useState()
     const [showEditModal, setShowEditModal] = useState(false)
+    const [showWatchlistStocks, setShowWatchlistStocks] = useState(false)
 
     const portfolio = useSelector((state) => state.portfolio)
     const watchlist = useSelector((state) => state.watchlist)
@@ -103,11 +105,19 @@ export default function OwnedStocks() {
                     <>
                         <div className={styles.watchlistDiv}>
                             <div>{watchlist.name}</div>
-                            <div className={styles.plusIconContainer} onClick={() => {
-                                setShowMenu(true)
-                                setWatchlistId(watchlist.id)
-                            }}>
-                                <img src={moreIcon} alt='more icon' />
+                            <div className={styles.iconContainer}>
+                                <div className={styles.plusIconContainer} onClick={() => {
+                                    setShowMenu((prevVal) => !prevVal)
+                                    setWatchlistId(watchlist.id)
+                                }}>
+                                    <img src={moreIcon} alt='more icon' />
+                                </div>
+                                <div className={styles.plusIconContainer} onClick={() => {
+                                    setShowWatchlistStocks((prevVal) => !prevVal)
+                                    setWatchlistId(watchlist.id)
+                                }}>
+                                    <img src={expandIcon} alt='expand icon' />
+                                </div>
                             </div>
                         </div>
                         {showMenu && (watchlistId === watchlist.id) && (
@@ -128,6 +138,17 @@ export default function OwnedStocks() {
                             </EditWatchlistModal>
                         )
                         }
+                        {watchlist.watchlistStocks.map((watchlistStock) => {
+                            return (showWatchlistStocks && (watchlist.id === watchlistId) &&
+                                <div className={styles.watchlistStockDiv} onClick={() => { redirectStock(watchlistStock.ticker) }}>
+                                    {watchlistStock.ticker}
+                                    <div className={styles.miniStockChartContainer}>
+                                        <MiniStockChart stockTicker={watchlistStock.ticker} />
+                                    </div>
+                                    <OwnedStockPrice stockTicker={watchlistStock.ticker} />
+                                </div>
+                            )
+                        })}
                     </>
                 )
             })}
