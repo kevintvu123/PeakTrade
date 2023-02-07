@@ -107,13 +107,14 @@ export default function OwnedStocks() {
                             <div>{watchlist.name}</div>
                             <div className={styles.iconContainer}>
                                 <div className={styles.plusIconContainer} onClick={() => {
-                                    setShowMenu(true)
+                                    setShowMenu((prevVal) => !prevVal)
                                     setWatchlistId(watchlist.id)
                                 }}>
                                     <img src={moreIcon} alt='more icon' />
                                 </div>
                                 <div className={styles.plusIconContainer} onClick={() => {
                                     setShowWatchlistStocks((prevVal) => !prevVal)
+                                    setWatchlistId(watchlist.id)
                                 }}>
                                     <img src={expandIcon} alt='expand icon' />
                                 </div>
@@ -138,7 +139,7 @@ export default function OwnedStocks() {
                         )
                         }
                         {watchlist.watchlistStocks.map((watchlistStock) => {
-                            return (showWatchlistStocks &&
+                            return (showWatchlistStocks && (watchlist.id === watchlistId) &&
                                 <div className={styles.watchlistStockDiv} onClick={() => { redirectStock(watchlistStock.ticker) }}>
                                     {watchlistStock.ticker}
                                     <div className={styles.miniStockChartContainer}>

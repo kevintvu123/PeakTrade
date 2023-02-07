@@ -15,10 +15,24 @@ function AddWatchlistStockForm({ setShowWatchlistStockModal, stockTicker }) {
         dispatch(getUserWatchlistThunk())
     }, [dispatch])
 
+
+    if (Object.keys(watchlist).length === 0) return null
+
+    const watchlistArr = watchlist.watchlistsArr
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const errors = [];
+
+        const watchlistStocks = (watchlist.watchlists[selectedWatchlist].watchlistStocks)
+        // console.log(watchlistStocks)
+
+        watchlistStocks.forEach((stock) => {
+            if (stock.ticker === stockTicker) {
+                errors.push("You already have this stock in chosen list")
+            }
+        })
 
         setErrors(errors);
 
@@ -31,10 +45,6 @@ function AddWatchlistStockForm({ setShowWatchlistStockModal, stockTicker }) {
         }
         // console.log(`Selected option: ${selectedWatchlist}`)
     }
-
-    if (Object.keys(watchlist).length === 0) return null
-
-    const watchlistArr = watchlist.watchlistsArr
 
     return (
         <div className={styles.addWatchlistStockFormContainer}>
@@ -58,6 +68,15 @@ function AddWatchlistStockForm({ setShowWatchlistStockModal, stockTicker }) {
                 </div>
                 <div className={styles.buttonContainer}>
                     <button type="submit">Save Changes</button>
+                </div>
+                <div className={styles.errorMap}>
+                    {errors.length > 0 && (
+                        <div>
+                            {errors.map((error) => (
+                                <div key={error}>{error}</div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </form>
         </div>
