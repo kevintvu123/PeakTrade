@@ -14,6 +14,7 @@ import styles from '../cssModules/OwnedStocks.module.css'
 import plusIcon from '../../assets/plus-watchlist-icon.png'
 import moreIcon from '../../assets/more-icon.png'
 import expandIcon from '../../assets/invert-icon.png'
+import xIcon from '../../assets/x-icon.png'
 import { deleteWatchlistThunk, getUserWatchlistThunk } from "../../store/watchlist"
 import EditWatchlistForm from "../Forms/EditWatchlistForm"
 
@@ -61,6 +62,10 @@ export default function OwnedStocks() {
         return deleteWatchlist
     }
 
+    const handleDeleteWatchlistStock = async (e, watchlistStockId) => {
+        e.stopPropagation();
+        console.log(watchlistStockId)
+    }
 
     return (
         <div className={styles.stockListContainer}>
@@ -146,6 +151,11 @@ export default function OwnedStocks() {
                                         <MiniStockChart stockTicker={watchlistStock.ticker} />
                                     </div>
                                     <OwnedStockPrice stockTicker={watchlistStock.ticker} />
+                                    <div className={styles.xIconContainer} onClick={(e) => {
+                                        handleDeleteWatchlistStock(e, watchlistStock.id)
+                                    }}>
+                                        <img src={xIcon} alt='x icon' />
+                                    </div>
                                 </div>
                             )
                         })}
