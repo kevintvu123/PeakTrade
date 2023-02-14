@@ -146,3 +146,17 @@
     cursor: pointer;
     background-color: #40494E;
 }
+
+.xIconContainer {
+    display: flex;
+    align-items: center;
+}
+
+.xIconContainer:hover {
+    cursor: pointer;
+    background-color: rgb(49, 49, 49);
+}
+
+.xIconContainer>img {
+    height: 18px;
+}
