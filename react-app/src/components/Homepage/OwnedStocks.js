@@ -15,7 +15,7 @@ import plusIcon from '../../assets/plus-watchlist-icon.png'
 import moreIcon from '../../assets/more-icon.png'
 import expandIcon from '../../assets/invert-icon.png'
 import xIcon from '../../assets/x-icon.png'
-import { deleteWatchlistThunk, getUserWatchlistThunk } from "../../store/watchlist"
+import { deleteWatchlistStockThunk, deleteWatchlistThunk, getUserWatchlistThunk } from "../../store/watchlist"
 import EditWatchlistForm from "../Forms/EditWatchlistForm"
 
 export default function OwnedStocks() {
@@ -64,7 +64,8 @@ export default function OwnedStocks() {
 
     const handleDeleteWatchlistStock = async (e, watchlistStockId) => {
         e.stopPropagation();
-        console.log(watchlistStockId)
+        const deleteWatchlistStock = await dispatch(deleteWatchlistStockThunk(watchlistStockId))
+        return deleteWatchlistStock
     }
 
     return (
