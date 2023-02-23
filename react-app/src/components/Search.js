@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
+
 import styles from "./cssModules/Searchbar.module.css"
+import searchIcon from '../assets/search-icon.png'
 
 
 
@@ -40,7 +42,6 @@ export default function Search() {
         <div className={styles.searchBarDiv}>
             <div className={styles.searchInputs}>
                 <div className={styles.searchIcon}>
-
                 </div>
                 <input
                     type="text"
