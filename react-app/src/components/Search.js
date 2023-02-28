@@ -53,8 +53,7 @@ export default function Search() {
                         }
                     }}
                     onFocus={() => setInputStatus(true)}
-                >
-                </input>
+                />
             </div>
             {!!keyword.length && inputStatus &&
                 <div className={styles.searchResults} onMouseEnter={() => setEnterDivStatus(true)} onMouseLeave={() => setEnterDivStatus(false)}>
