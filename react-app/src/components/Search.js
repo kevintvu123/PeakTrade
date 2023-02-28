@@ -15,7 +15,6 @@ export default function Search() {
     const apiKey = process.env.REACT_APP_API_KEY
     const url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keyword}&apikey=${apiKey}`
 
-    
     useEffect(() => {
         if (keyword.length) {
             fetch(url)
