@@ -1,3 +1,6 @@
+// Redux (JS state management library) - state is stored in "store" object
+// "Single source of Truth" - allows easier management and predicatability
+
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'

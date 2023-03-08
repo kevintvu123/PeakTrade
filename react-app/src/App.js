@@ -28,8 +28,10 @@ function App() {
   }
 
   return (
+    // BrowserRouter uses HTML5 history API to allow navigation w/ URLS to diff. parts of application w/o full refresh
     <BrowserRouter>
       {user && <NavBar />}
+      {/* Switch renders first child that matches the current URL exactly. If not matches, renders a fallback route (404 Route) */}
       <Switch>
         <Route path='/' exact={true}>
           <Landing />

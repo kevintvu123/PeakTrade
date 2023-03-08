@@ -4,10 +4,11 @@ from flask_login import UserMixin
 from datetime import datetime
 from .groups import group_members
 
-
+#UserMixin defines a properties and methods for user auth such as 'is_authenticated'
 class User(db.Model, UserMixin):
     __tablename__ = "users"
 
+    #This is for deployment for Render
     if environment == "production":
         __table_args__ = {"schema": SCHEMA}
 
@@ -35,6 +36,7 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    #returns dictionary representation of user object.  
     def to_dict(self):
         return {
             "id": self.id,
