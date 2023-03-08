@@ -5,12 +5,14 @@ Revises:
 Create Date: 2022-12-21 13:55:12.004975
 
 """
+#Alembic is a database migration tool for SQLAlchemy
 from alembic import op
 import sqlalchemy as sa
 
 import os
 
 environment = os.getenv("FLASK_ENV")
+#SCHEMA is used for deployment to render
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.

@@ -6,10 +6,9 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 auth_routes = Blueprint("auth", __name__)
 
-
 def validation_errors_to_error_messages(validation_errors):
     """
-    Simple function that turns the WTForms validation errors into a simple list
+    Formats WTForms validation errors into a simple list
     """
     errorMessages = []
     for field in validation_errors:
@@ -17,13 +16,16 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(error)
     return errorMessages
 
-
+# Used in react App.js  
+# Checks whether corresponding user object exists in the session
 @auth_routes.route("/")
 def authenticate():
     """
     Authenticates a user.
     """
+    # current_user holds full instance of user. 
     if current_user.is_authenticated:
+        # info for current user is sent to front end state
         return current_user.to_dict()
     return {"errors": ["Unauthorized"]}
 
@@ -34,12 +36,12 @@ def login():
     Logs a user in
     """
     form = LoginForm()
-    # Get the csrf_token from the request cookie and put it into the
-    # form manually to validate_on_submit can be used
+    # Get the csrf_token from the request cookie and put it into the form manually to validate_on_submit can be used
     form["csrf_token"].data = request.cookies["csrf_token"]
+    # '.validate_on_submit() checks the csrf_token'
     if form.validate_on_submit():
-        # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data["email"]).first()
+        # Logs user in and sets up a session for the user
         login_user(user)
         return user.to_dict()
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
@@ -48,7 +50,7 @@ def login():
 @auth_routes.route("/logout")
 def logout():
     """
-    Logs a user out
+    Logs a user out and ends session
     """
     logout_user()
     return {"message": "User logged out"}

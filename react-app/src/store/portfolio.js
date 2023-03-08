@@ -1,8 +1,8 @@
-
 //types
 const GET_USER_PORTFOLIO = "portfolio/getUserPortfolio"
 
-//action creators
+//action creators - functions that return plain JS objects (actions)
+//actions are dispatched to Redux store (updates app state) 
 const getUserPortfolio = (payload) => {
     return {
         type: GET_USER_PORTFOLIO,
@@ -10,7 +10,8 @@ const getUserPortfolio = (payload) => {
     };
 };
 
-//thunks
+//thunks - function returning function (used to fetch data from API)
+// used in conjunction w/ action creators to manage async operations
 export const getUserPortfolioThunk = () => async (dispatch) => {
     const response = await fetch("/api/transactions");
 
@@ -50,6 +51,7 @@ const normalizeStocks = (stocksArr) => {
     return stocksObj
 }
 
+// reducer - specify how to update state with given action
 const portfolioReducer = (state = {}, action) => {
     let newState = { ...state }
     switch (action.type) {

@@ -4,7 +4,7 @@ from app.models import User
 
 user_routes = Blueprint('users', __name__)
 
-
+#login_required protects route from not being seen by unauthorized user and redirected to unauthorized route
 @user_routes.route('/')
 @login_required
 def users():

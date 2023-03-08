@@ -23,6 +23,7 @@ if (process.env.NODE_ENV !== "production") {
   window.watchlistActions = watchlistActions;
 }
 
+//ReactDOM.render is used to render a React element into the DOM (Document Object Model)
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
