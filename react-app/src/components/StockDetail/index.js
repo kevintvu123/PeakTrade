@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getUserPortfolioThunk } from "../../store/portfolio"
 
-import StockChart from "./StockChart"
+// import StockChart from "./StockChart"
+import ApexStockChart from "./ApexStockChart"
 import { AddWatchlistStockModal } from "../../context/AddWatchlistStockModal"
 
 import BuyStockForm from "../Forms/BuyStockForm"
@@ -103,7 +104,8 @@ export default function StockDetail() {
                         <div className={styles.stockPriceContainer}>${scrollingStockPrice ? parseFloat(scrollingStockPrice).toFixed(2) : parseFloat(stockPrice).toFixed(2)}</div>
                         <div className={styles.percentChangeContainer}>${stockChange} ({stockChangePercent}%) Today</div>
                         <div className={styles.stockChartContainer}>
-                            <StockChart stockTicker={stockTicker} setScrollingStockPrice={setScrollingStockPrice} />
+                            {/* <StockChart stockTicker={stockTicker} setScrollingStockPrice={setScrollingStockPrice} /> */}
+                            <ApexStockChart stockTicker={stockTicker} setScrollingStockPrice={setScrollingStockPrice}/>
                         </div>
                         {ownedStockObj && (
                             <div className={styles.valueCostAnalyticsContainer}>

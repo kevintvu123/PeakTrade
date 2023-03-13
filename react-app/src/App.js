@@ -8,6 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import StockDetail from './components/StockDetail';
 import Homepage from './components/Homepage';
 import Landing from './components/Landing';
+import ApexStockChart from './components/StockDetail/ApexStockChart';
 import { authenticate } from './store/session';
 
 function App() {
@@ -48,6 +49,9 @@ function App() {
         <ProtectedRoute path='/stocks/:stockTicker'>
           <StockDetail />
         </ProtectedRoute>
+        <Route path='/test' exact={true}>
+          <ApexStockChart />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
