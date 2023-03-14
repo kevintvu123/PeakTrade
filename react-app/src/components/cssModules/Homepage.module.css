@@ -26,6 +26,7 @@
 .portfolioValueContainer {
     font-size: 30px;
     font-weight: 600;
+    display: flex;
 }
 
 .portfolioChangeContainer {

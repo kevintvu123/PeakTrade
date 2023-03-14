@@ -4,13 +4,13 @@ import Chart from "react-apexcharts"
 
 import styles from '../cssModules/Homepage.module.css'
 
-export default function ApexPortfolioChart({ portfolio }) {
+export default function ApexPortfolioChart({ portfolio, setScrollingStockPrice }) {
 
     const [isLoading, setIsLoading] = useState(false)
     const [chartOptions, setChartOptions] = useState({});
 
     const stocksArr = portfolio.stocksArr
-    console.log(stocksArr)
+    const stocksObj = portfolio.stocks
 
     useEffect(() => {
         setIsLoading(false)
@@ -43,9 +43,9 @@ export default function ApexPortfolioChart({ portfolio }) {
                 const timestamp = responses[0].chart.result[0].timestamp[i] * 1000;
                 let sum = 0;
 
-                //Iterate through each response and sum up the closing price at timestamp
+                //Iterate through each response and sum up the (closing price at timestamp * how many of the stock the user owns)
                 for (let j = 0; j < responses.length; j++) {
-                    sum += responses[j].chart.result[0].indicators.quote[0].close[i];
+                    sum += (responses[j].chart.result[0].indicators.quote[0].close[i] * stocksObj[responses[j].chart.result[0].meta.symbol].amount);
                 }
                 //Add the {x: timestamp(formatted), y: sum}
                 formattedData.push({
@@ -75,12 +75,12 @@ export default function ApexPortfolioChart({ portfolio }) {
                             mouseMove: function (event, chartContext, config) {
                                 // console.log(config.dataPointIndex)
                                 if (config.dataPointIndex >= 0) {
-                                    console.log(formattedData[config.dataPointIndex].y)
+                                    setScrollingStockPrice(parseFloat(formattedData[config.dataPointIndex].y).toFixed(2))
                                 }
                             },
-                            // mouseLeave: () => {
-                            //     setScrollingStockPrice()
-                            // }
+                            mouseLeave: () => {
+                                setScrollingStockPrice()
+                            }
                         }
                     },
                     series: [{
@@ -116,9 +116,9 @@ export default function ApexPortfolioChart({ portfolio }) {
             //Chart will only load after data has been fetched (prevents Error)
             setIsLoading(true)
         }
-        
+
         fetchData()
-    }, [stocksArr])
+    }, [])
 
     return (
         <div className={styles.portfolioChartInnerContainer}>
