@@ -6,7 +6,7 @@ export default function ApexStockChart({ stockTicker, setScrollingStockPrice }) 
     const [isLoading, setIsLoading] = useState(false)
     const [chartOptions, setChartOptions] = useState({})
 
-    // useEffect hook to make the API request and update the state variable data
+    // useEffect hook to make the API request and update chartOptions
     useEffect(() => {
         setIsLoading(false)
         const YHapiKey = process.env.REACT_APP_YH_API_KEY
@@ -33,7 +33,7 @@ export default function ApexStockChart({ stockTicker, setScrollingStockPrice }) 
                     y: price
                 }));
 
-                //Creating array of dates to specify available dates on x axis
+                //Creating array of dates to specify available dates on x axis in Apex Chart
                 const dates = formattedData.map(dataPoint => dataPoint.x)
 
                 //Setting up chart options and styling for Apex Charts

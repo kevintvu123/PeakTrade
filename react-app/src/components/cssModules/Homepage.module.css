@@ -45,6 +45,11 @@
     /* border: 1px solid #30363A; */
 }
 
+.portfolioChartInnerContainer {
+    width: 100%;
+    /* border: 1px solid red; */
+}
+
 .buyingPowerContainer {
     margin-top: 50px;
     font-size: 15px;
