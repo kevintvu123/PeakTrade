@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getUserPortfolioThunk } from '../../store/portfolio'
 
 import OwnedStocks from './OwnedStocks'
@@ -12,6 +12,8 @@ import styles from '../cssModules/Homepage.module.css'
 
 export default function Homepage() {
     const dispatch = useDispatch()
+
+    const [scrollingStockPrice, setScrollingStockPrice] = useState()
 
     const portfolio = useSelector((state) => state.portfolio)
 
@@ -33,14 +35,14 @@ export default function Homepage() {
                 <div className={styles.mainContainer}>
                     <div className={styles.leftHalfContainer}>
                         <div className={styles.portfolioValueContainer}>
-                            <PortfolioValue />
+                            ${scrollingStockPrice ? scrollingStockPrice : <PortfolioValue />}
                         </div>
                         <div className={styles.portfolioChangeContainer}>
 
                         </div>
                         <div className={styles.portfolioChartContainer}>
                             {/* <PortfolioChart /> */}
-                            <ApexPortfolioChart portfolio={portfolio} />
+                            <ApexPortfolioChart portfolio={portfolio} setScrollingStockPrice={setScrollingStockPrice}/>
                         </div>
                         <div className={styles.buyingPowerContainer}>
                             <div>Buying Power</div>

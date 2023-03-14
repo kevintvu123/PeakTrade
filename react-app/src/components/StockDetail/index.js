@@ -18,11 +18,12 @@ export default function StockDetail() {
     const { stockTicker } = useParams()
 
     const [hasSubmitted, setHasSubmitted] = useState(false)
+    const [scrollingStockPrice, setScrollingStockPrice] = useState()
+
     const [stockName, setStockName] = useState("")
     const [stockPrice, setStockPrice] = useState()
     const [stockChange, setStockChange] = useState()
     const [stockChangePercent, setStockChangePercent] = useState()
-    const [scrollingStockPrice, setScrollingStockPrice] = useState()
     const [stockDesc, setStockDesc] = useState("No company information available")
     const [stockMarketCap, setStockMarketCap] = useState("-")
     const [stockPERatio, setStockPERatio] = useState("-")

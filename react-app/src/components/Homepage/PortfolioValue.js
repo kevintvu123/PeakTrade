@@ -25,7 +25,7 @@ export default function PortfolioValue() {
                 const response = await fetch(
                     `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock.ticker}&apikey=${apiKey}`
                 )
-                    .catch(err => console.err(err))
+                    .catch(err => console.error(err))
                 const json = await response.json();
                 // console.log(json)
                 const price = (json['Global Quote']['05. price']) * stock.amount;
@@ -46,7 +46,7 @@ export default function PortfolioValue() {
 
     return (
         <div>
-            ${formatCommas(parseFloat(ownedStocksMarketVal).toFixed(2))}
+            {formatCommas(parseFloat(ownedStocksMarketVal).toFixed(2))}
         </div>
     )
 }
