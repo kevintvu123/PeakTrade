@@ -4,14 +4,15 @@ import { getUserPortfolioThunk } from '../../store/portfolio'
 
 import OwnedStocks from './OwnedStocks'
 import PortfolioValue from './PortfolioValue'
-import PortfolioChart from './PortfolioChart'
+// import PortfolioChart from './PortfolioChart'
+import ApexPortfolioChart from './ApexPortfolioChart'
 import Group from './Group'
 
 import styles from '../cssModules/Homepage.module.css'
 
 export default function Homepage() {
     const dispatch = useDispatch()
-    
+
     const portfolio = useSelector((state) => state.portfolio)
 
     useEffect(() => {
@@ -35,10 +36,11 @@ export default function Homepage() {
                             <PortfolioValue />
                         </div>
                         <div className={styles.portfolioChangeContainer}>
-                            
+
                         </div>
                         <div className={styles.portfolioChartContainer}>
-                            <PortfolioChart />
+                            {/* <PortfolioChart /> */}
+                            <ApexPortfolioChart portfolio={portfolio} />
                         </div>
                         <div className={styles.buyingPowerContainer}>
                             <div>Buying Power</div>
