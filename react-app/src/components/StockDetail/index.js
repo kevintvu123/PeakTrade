@@ -75,8 +75,8 @@ export default function StockDetail() {
     if (!portfolioBool) return null
 
     const buyingPower = portfolio.buyingPower
-
     const ownedStockObj = portfolio.stocks[stockTicker] //returns undefined if stock isn't in portfolio
+    
     const calcMarketValue = ownedStockObj ? ownedStockObj.amount * stockPrice : null
     const calcAvgCost = ownedStockObj ? ownedStockObj.amount * ownedStockObj.avgStockValue : null
 

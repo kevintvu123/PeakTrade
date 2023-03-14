@@ -22,11 +22,19 @@ export default function ApexStockChart({ stockTicker, setScrollingStockPrice }) 
             //Parsing JSON into JS Object
             .then(response => response.json())
             .then(response => {
-                // Normalizing data from YH Finance for 1 month in 60 min intervals
+                // Normalizing data from YH Finance for 1 month in 30 min intervals
                 const formattedData = response.chart.result[0].indicators.quote[0].close.map((price, index) => ({
-                    x: new Date(response.chart.result[0].timestamp[index] * 1000),
+                    x: new Date(response.chart.result[0].timestamp[index] * 1000).toLocaleString(undefined, {
+                        day: 'numeric',
+                        month: 'short',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                    }),
                     y: price
                 }));
+
+                //Creating array of dates to specify available dates on x axis
+                const dates = formattedData.map(dataPoint => dataPoint.x)
 
                 //Setting up chart options and styling for Apex Charts
                 setChartOptions(
@@ -35,6 +43,7 @@ export default function ApexStockChart({ stockTicker, setScrollingStockPrice }) 
                             type: 'line',
                             animations: { enabled: false },
                             zoom: { enabled: false },
+                            parentHeightOffset: 0,
                             toolbar: { show: false },
                             events: {
                                 mouseMove: function (event, chartContext, config) {
@@ -49,11 +58,12 @@ export default function ApexStockChart({ stockTicker, setScrollingStockPrice }) 
                             }
                         },
                         series: [{
-                            data: formattedData,
+                            data: formattedData
                         }],
                         colors: ['#5ac53b'],
                         xaxis: {
-                            type: 'datetime',
+                            type: 'category',
+                            categories: dates,
                             position: 'top',
                             labels: {
                                 show: false
@@ -71,9 +81,8 @@ export default function ApexStockChart({ stockTicker, setScrollingStockPrice }) 
                         },
                         grid: { show: false },
                         tooltip: {
-                            enabled: true,
-                            items: { display: 'none' },
                             x: { show: false },
+                            items: { display: 'none' },
                         },
 
                     }
