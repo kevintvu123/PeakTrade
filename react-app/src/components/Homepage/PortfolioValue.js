@@ -1,22 +1,14 @@
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { getUserPortfolioThunk } from "../../store/portfolio"
 
-
-export default function PortfolioValue() {
-    const dispatch = useDispatch()
+export default function PortfolioValue({portfolio}) {
 
     const [ownedStocksMarketVal, setOwnedStocksMarketVal] = useState(0)
 
-    const portfolio = useSelector((state) => state.portfolio)
     const apiKey = process.env.REACT_APP_API_KEY
     const stocksArr = portfolio.stocksArr
 
-    useEffect(() => {
-        dispatch(getUserPortfolioThunk())
-    }, [dispatch])
-
-    useEffect(() => { //fetches price from AlphaVantage for each stock user owns and adds them up
+    //fetches price from AlphaVantage for each stock user owns and sums them up
+    useEffect(() => { 
         async function fetchData() {
             if (!stocksArr) return null
 
@@ -27,7 +19,6 @@ export default function PortfolioValue() {
                 )
                     .catch(err => console.error(err))
                 const json = await response.json();
-                // console.log(json)
                 const price = (json['Global Quote']['05. price']) * stock.amount;
                 sum += parseFloat(price);
             }
@@ -38,15 +29,9 @@ export default function PortfolioValue() {
 
     if (Object.keys(portfolio).length === 0) return null
 
-    // const buyingPower = ((portfolio.buyingPower.toFixed(2)))
-
-    function formatCommas(num) {
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
     return (
         <div>
-            {formatCommas(parseFloat(ownedStocksMarketVal).toFixed(2))}
+            {(parseFloat(ownedStocksMarketVal).toFixed(2))}
         </div>
     )
 }

@@ -54,6 +54,17 @@
     /* border: 1px solid blue; */
 }
 
+.stockChartInnerContainer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stockChart {
+    width: 100%;
+}
+
 .valueCostAnalyticsContainer {
     font-size: 13px;
     width: 100%;
