@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Chart from "react-apexcharts"
-import PulseLoader from "react-spinners/PulseLoader"
 
+import PulseLoader from "react-spinners/PulseLoader"
 import styles from '../cssModules/StockDetail.module.css'
 
 export default function ApexStockChart({ stockTicker, setScrollingStockPrice }) {
@@ -47,6 +47,7 @@ export default function ApexStockChart({ stockTicker, setScrollingStockPrice }) 
                             animations: { enabled: false },
                             zoom: { enabled: false },
                             parentHeightOffset: 0,
+                            offsetX: -5,
                             toolbar: { show: false },
                             events: {
                                 mouseMove: function (event, chartContext, config) {

@@ -78,6 +78,7 @@ export default function ApexPortfolioChart({ portfolio, setScrollingStockPrice }
                         animations: { enabled: false },
                         zoom: { enabled: false },
                         parentHeightOffset: 0,
+                        offsetX: -5,
                         toolbar: { show: false },
                         events: {
                             mouseMove: function (event, chartContext, config) {

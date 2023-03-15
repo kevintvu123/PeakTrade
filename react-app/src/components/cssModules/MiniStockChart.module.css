@@ -4,23 +4,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.loadingSpinner {
-    border: 5px solid black;
-    border-top: 5px solid #00C805;
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
-    animation: spin 0.9s linear infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+    /* border: 1px solid red; */
 }
