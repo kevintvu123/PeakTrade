@@ -71,7 +71,7 @@ def inject_csrf_token(response):
     )
     return response
 
-# Not necessary but Flask is able to make back-end documentation for you, accessed by navigating to route
+# Not necessary but Flask is able to make back-end documentation
 @app.route("/api/docs")
 def api_help():
     """
