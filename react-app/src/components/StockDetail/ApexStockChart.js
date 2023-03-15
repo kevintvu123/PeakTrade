@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 import Chart from "react-apexcharts"
+import PulseLoader from "react-spinners/PulseLoader"
+
+import styles from '../cssModules/StockDetail.module.css'
 
 export default function ApexStockChart({ stockTicker, setScrollingStockPrice }) {
 
@@ -98,12 +101,12 @@ export default function ApexStockChart({ stockTicker, setScrollingStockPrice }) 
     }, [stockTicker])
 
     return (
-        <div>
+        <div className={styles.stockChartInnerContainer}>
             {!isLoading && (
-                <p>Loading...</p>
+                <PulseLoader color="#5ac53b" />
             )}
             {isLoading && (
-                <Chart options={chartOptions} series={chartOptions.series} height={295} />
+                <Chart options={chartOptions} series={chartOptions.series} height={295} width={'100%'} className={styles.stockChart}/>
             )}
         </div>
     )

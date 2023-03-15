@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Chart from "react-apexcharts"
-
+import PulseLoader from "react-spinners/PulseLoader"
 
 import styles from '../cssModules/Homepage.module.css'
 
@@ -131,7 +131,7 @@ export default function ApexPortfolioChart({ portfolio, setScrollingStockPrice }
     return (
         <div className={styles.portfolioChartInnerContainer}>
             {!isLoading && (
-                <div>Loading...</div>
+                <PulseLoader color="#5ac53b" />
             )}
             {!hasStock && (
                 <div>Please Navigate Using The Search Bar To Add Stocks!</div>
