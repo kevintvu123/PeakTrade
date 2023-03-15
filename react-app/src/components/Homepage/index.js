@@ -35,7 +35,7 @@ export default function Homepage() {
                 <div className={styles.mainContainer}>
                     <div className={styles.leftHalfContainer}>
                         <div className={styles.portfolioValueContainer}>
-                            ${scrollingStockPrice ? scrollingStockPrice : <PortfolioValue />}
+                            ${scrollingStockPrice ? scrollingStockPrice : <PortfolioValue portfolio = {portfolio}/>}
                         </div>
                         <div className={styles.portfolioChangeContainer}>
 

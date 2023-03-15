@@ -6,6 +6,7 @@ import styles from '../cssModules/Homepage.module.css'
 
 export default function ApexPortfolioChart({ portfolio, setScrollingStockPrice }) {
 
+    const [hasStock, setHasStock] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
     const [chartOptions, setChartOptions] = useState({});
 
@@ -14,6 +15,13 @@ export default function ApexPortfolioChart({ portfolio, setScrollingStockPrice }
 
     useEffect(() => {
         setIsLoading(false)
+
+        if (stocksArr.length === 0) {
+            setHasStock(false)
+            setIsLoading(true)
+            return
+        }
+
         const YHapiKey = process.env.REACT_APP_YH_API_KEY
 
         const options = {
@@ -123,10 +131,13 @@ export default function ApexPortfolioChart({ portfolio, setScrollingStockPrice }
     return (
         <div className={styles.portfolioChartInnerContainer}>
             {!isLoading && (
-                <p>Loading...</p>
+                <div>Loading...</div>
             )}
-            {isLoading && (
-                <Chart options={chartOptions} series={chartOptions.series} height={330} />
+            {!hasStock && (
+                <div>Please Navigate Using The Search Bar To Add Stocks!</div>
+            )}
+            {isLoading && hasStock && (
+                <Chart options={chartOptions} series={chartOptions.series} height={330} width={'100%'} className={styles.portfolioChart} />
             )}
         </div>
     )
