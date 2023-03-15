@@ -35,6 +35,7 @@ export default function ApexPortfolioChart({ portfolio, setScrollingStockPrice }
         const fetchData = async () => {
             //Set up promises for each stock in user's portfolio
             const promises = stocksArr.map(async (stock) => {
+                await new Promise(resolve => setTimeout(resolve, 2000));
                 const response = await fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v3/get-chart?interval=60m&symbol=${stock.ticker}&range=1mo&region=US&includePrePost=false&useYfid=true&includeAdjustedClose=true&events=capitalGain%2Cdiv%2Csplit`, options)
                 return response.json()
             })

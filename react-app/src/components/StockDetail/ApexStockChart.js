@@ -48,6 +48,7 @@ export default function ApexStockChart({ stockTicker, setScrollingStockPrice }) 
                             zoom: { enabled: false },
                             parentHeightOffset: 0,
                             offsetX: -5,
+                            offsetY: 20,
                             toolbar: { show: false },
                             events: {
                                 mouseMove: function (event, chartContext, config) {
