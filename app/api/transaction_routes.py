@@ -33,10 +33,11 @@ def handle_create_update_delete_transactions():
 
     if form.validate_on_submit():
 
-        # This checks for an instance of the stock ticker in the user's portfolio
+        # Checks for an instance of the stock ticker in the user's portfolio
         stock_in_portfolio = (
             Stock.query.filter(Stock.user_id == user_id)
             .filter(Stock.ticker == data["ticker"])
+            #Similar to LIMIT 1 w/ SQL query
             .first()
         )
 
@@ -85,6 +86,8 @@ def handle_create_update_delete_transactions():
                     responseObj["user"] = user.to_dict()
 
                     return responseObj
+                else:
+                    return {"error": "Form is invalid"}, 403
 
             # Stock ticker does exist in the user's portfolio (Update)
             if stock_in_portfolio:
@@ -124,10 +127,10 @@ def handle_create_update_delete_transactions():
                     responseObj["user"] = user.to_dict()
 
                     return responseObj
+                else:
+                    return {"error": "Form is invalid"}, 403
 
-        if data["order_type"] == "sell":
-
-            # Still need to create an error handler for stock not in portfolio
+        elif data["order_type"] == "sell":
 
             if stock_in_portfolio:
                 # Sell all stocks (Delete)
@@ -156,7 +159,7 @@ def handle_create_update_delete_transactions():
                     return responseObj
 
                 # Sell portion of stock (Update)
-                if stock_in_portfolio.amount > int(data["quantity"]):
+                elif stock_in_portfolio.amount > int(data["quantity"]):
 
                     new_amount = stock_in_portfolio.amount - int(data["quantity"])
                     data["avg_stock_value"] = stock_in_portfolio.avg_stock_value
@@ -188,5 +191,15 @@ def handle_create_update_delete_transactions():
                         responseObj["user"] = user.to_dict()
 
                         return responseObj
+                    else:
+                        return {"error": "Stock Form is invalid"}, 401
+                else:
+                    return {"error": "User doesn't own enough of this stock"}, 401
+            else:
+                return {"error": "User doesn't own this stock"}, 401
+        else:
+            return {"error": "Order Type is invalid"}, 401
+    else:
+        return {"error": "Transaction Form is invalid"}, 401
 
-    return {"error": "Please enter a valid quantity"}, 400
+    return {"error": "Internal Server Error"}, 500
