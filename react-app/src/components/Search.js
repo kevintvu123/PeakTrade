@@ -12,12 +12,10 @@ export default function Search() {
     const [inputStatus, setInputStatus] = useState(false)
     const [enterDivStatus, setEnterDivStatus] = useState(false)
 
-    const apiKey = process.env.REACT_APP_API_KEY
-    const url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keyword}&apikey=${apiKey}`
-
-    useEffect(() => {
-        if (keyword.length) {
-            fetch(url)
+    const fetchData = (value) => {
+        const apiKey = process.env.REACT_APP_API_KEY
+        if (value.length) {
+            fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${value}&apikey=${apiKey}`)
                 .then(res => res.json())
                 .then((result) => {
                     setSearchResults(result.bestMatches)
@@ -25,7 +23,12 @@ export default function Search() {
         } else {
             setSearchResults([])
         }
-    }, [keyword, url])
+    }
+
+    const handleChange = (value) => {
+        setKeyword(value)
+        fetchData(value)
+    }
 
     const redirectStockDetail = (stockTicker) => {
         history.push(`/stocks/${stockTicker}`)
@@ -40,12 +43,12 @@ export default function Search() {
         <div className={styles.searchBarDiv}>
             <div className={styles.searchInputs}>
                 <div className={styles.searchIcon}>
-                    <img src={searchIcon} alt="search icon"/>
+                    <img src={searchIcon} alt="search icon" />
                 </div>
                 <input
                     type="text"
                     value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}
+                    onChange={(e) => handleChange(e.target.value)}
                     placeholder="Search"
                     onBlur={() => {
                         if (!enterDivStatus) {

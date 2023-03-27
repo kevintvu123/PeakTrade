@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import Search from './Search';
-import NewSearch from './NewSearch';
 import styles from './cssModules/Navbar.module.css'
 import logo from '../assets/final-peaktrade-logo.png'
 
@@ -44,7 +43,6 @@ const NavBar = () => {
           <img src={logo} alt='logo' className={styles.logo} />
         </NavLink>
         <Search />
-        {/* <NewSearch /> */}
       </div>
       <div className={styles.accountNavLinks} onClick={openMenu}>
         Account
