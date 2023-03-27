@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useHistory } from "react-router-dom"
 
 import styles from "./cssModules/Searchbar.module.css"
@@ -39,6 +39,14 @@ export default function Search() {
     //filters stocks with period in ticker b/c there is no result on detail page
     const filteredStocks = searchResults?.filter(stock => !stock['1. symbol'].includes('.'))
 
+    //Slice long strings >40 char to append "..."
+    const shortenName = (input) => {
+        if (input.length > 40) {
+            const firstHalf = input.slice(0, 40);
+            return firstHalf + "...";
+        } else return input;
+    };
+
     return (
         <div className={styles.searchBarDiv}>
             <div className={styles.searchInputs}>
@@ -64,8 +72,8 @@ export default function Search() {
                         filteredStocks.map((result) => {
                             return (
                                 <div key={result['1. symbol']} className={styles.eachSearchResult} onClick={() => redirectStockDetail(result['1. symbol'])}>
-                                    <div>{result['1. symbol']}</div>
-                                    <div>{result['2. name']}</div>
+                                    <div className={styles.eachSymbolDiv}>{result['1. symbol']}</div>
+                                    <div>{shortenName(result['2. name'])}</div>
                                 </div>
                             )
                         })
