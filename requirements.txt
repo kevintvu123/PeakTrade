@@ -4,7 +4,7 @@
 #
 #    pipenv lock --requirements
 # 
-# Older versions can use 
+# Older versions of pipenv can use:
 #    pipenv lock
 #    pipenv run pip freeze > requirements.txt
 
