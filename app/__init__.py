@@ -12,9 +12,19 @@ from .api.group_routes import group_routes
 from .api.watchlist_routes import watchlist_routes
 from .seeds import seed_commands
 from .config import Config
+from .test_config import TestConfig
 
 # Creating instance of Flask class 
 app = Flask(__name__, static_folder="../react-app/build", static_url_path="/")
+
+# Creating test instance of the Flask application for Pytest unit testing
+def create_test_app(config_name):
+    app = Flask(__name__)
+    app.config.from_object(TestConfig)
+
+    db.init_app(app)
+
+    return app
 
 # Setup login manager
 login = LoginManager(app)
