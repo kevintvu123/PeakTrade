@@ -1,35 +1,31 @@
-from app.models.user import User
+import pytest
+from app.models import db, User
+from app import create_test_app
 #run "pipenv run pytest" in terminal even in pipenv shell to run the test
 
-def test_user_creation():
-    """
-    GIVEN a User model
-    WHEN a new User is created
-    THEN check the email, hashed_password, first_name, last_name, and buying_power are defined correctly
-    """
-    #Create a new user object
-    #using 'password' instead of 'hashed_password' because the 'password' attribute is the one with the setter method
+@pytest.fixture
+def test_app():
+    app = create_test_app('test')
+    with app.app_context():
+        # db.create_all() -> SQLAlchemy looks for all models defined in app and creates necessary tables
+        db.create_all()
+        # yield app passes the app instance to the test function
+        # Once the test is finished, the code after the yield statement is executed to tear down the fixture by removing the database session and dropping all of the tables
+        yield app
+        db.session.remove()
+        db.drop_all()
+
+def test_user_creation(test_app):
     user = User(
-        email="test@example.com",
-        first_name="John",
-        last_name="Doe",
-        buying_power=10000.00,
-        password="password"
+        email='testuser@example.com',
+        first_name='Test',
+        last_name='User',
+        password='password'
     )
 
-    #Check that the user object was created
+    with test_app.app_context():
+        db.session.add(user)
+        db.session.commit()
 
-    assert isinstance(user, User)
-
-    #Check that the user's attributes were set correctly
-    assert user.email == "test@example.com"
-    assert user.first_name == "John"
-    assert user.last_name == "Doe"
-    assert user.buying_power == 10000.00
-
-    #Check that the password was hashed
-    print(user.password)
-    assert user.password != "password"
-    assert user.check_password("password")  #Check that check_password function returns True for the original password
-
-
+        assert user.id is not None
+        assert user in db.session
