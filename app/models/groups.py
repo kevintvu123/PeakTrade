@@ -34,9 +34,11 @@ class Group(db.Model):
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
     created_at = db.Column(db.DateTime, default=datetime.now)
-    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    updated_at = db.Column(
+        db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-    members = db.relationship("User", secondary=group_members, back_populates="groups")
+    members = db.relationship(
+        "User", secondary=group_members, back_populates="groups")
 
     @property
     def _name(self):
